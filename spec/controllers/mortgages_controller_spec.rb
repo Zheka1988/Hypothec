@@ -12,18 +12,19 @@ RSpec.describe MortgagesController, type: :controller do
       expect(assigns(:mortgages)).to match_array(mortgages)
     end
 
-    it 'rendern index view' do
+    it 'render index view' do
       expect(response).to render_template :index
     end
   end
 
   describe 'GET #show' do
     before { get :show, params: { id: mortgage } }
+
     it 'assigns the requested mortgage to @mortgage' do  
       expect(assigns(:mortgage)).to eq mortgage
     end
     
-    it 'rendern show view' do
+    it 'render show view' do
       expect(response).to render_template :show
     end
   end
@@ -47,7 +48,7 @@ RSpec.describe MortgagesController, type: :controller do
       expect(assigns(:mortgage)).to eq mortgage
     end
     
-    it 'rendern edit view' do
+    it 'render edit view' do
       expect(response).to render_template :edit
     end   
   end
@@ -84,7 +85,7 @@ RSpec.describe MortgagesController, type: :controller do
       end
 
       it 'changes mortgage attributes' do
-        patch :update, params: { id: mortgage, mortgage: { title: "new title", description: "new description"} }
+        patch :update, params: { id: mortgage, mortgage: { title: "new title", description: "new description" } }
         mortgage.reload
 
         expect(mortgage.title).to eq "new title"
@@ -117,7 +118,7 @@ RSpec.describe MortgagesController, type: :controller do
     let!(:mortgage) { create(:mortgage) }
     
     it 'deletes the mortgage' do
-      expect {delete :destroy, params: { id: mortgage } }.to change(Mortgage, :count).by(-1)
+      expect { delete :destroy, params: { id: mortgage } }.to change(Mortgage, :count).by(-1)
     end
 
     it 'redirects to index' do

@@ -1,5 +1,6 @@
 class MortgagesController < ApplicationController
   before_action :load_mortgage, only: [:show, :edit, :update, :destroy]
+  
   def index
     @mortgages = Mortgage.all
   end

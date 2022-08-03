@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'User can sign in', %q{
-  In order to save history calculations
+  In order to access to more functionality
   As an authenticated user
   I'd like to be able sign in 
 } do

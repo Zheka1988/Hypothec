@@ -2,19 +2,20 @@ doctype html
 html
   head
     title Hypothec
-    meta name="viewport" content="width=device-width,initial-scale=1"
+    meta name='viewport' content='width=device-width,initial-scale=1'
 
     = csrf_meta_tags
     = csp_meta_tag
 
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_importmap_tags
   
-  body
+  body class='container'
     = render 'shared/header'
-    p class="notice"
-      = notice
-    p class="alert"
-      = alert
     
-    = yield
+    p class='notice'
+      = notice
+    p class='alert'
+      = alert
+    div class='d-flex justify-content-center'  
+     = yield

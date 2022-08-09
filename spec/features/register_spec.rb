@@ -6,7 +6,7 @@ feature 'User can registered in the system', %q{
   I'd like be able registration
 } do
   
-  given(:user) { User.create!(email: 'user@test.com', password: '12345678', password_confirmation: '12345678') }
+  given(:user) { create(:user) }
   
   background { visit new_user_registration_path }
 

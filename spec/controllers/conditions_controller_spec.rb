@@ -72,7 +72,7 @@ RSpec.describe ConditionsController, type: :controller do
       
       it 'does not save the condition' do
         condition.reload
-        expect(condition.interest_rate).to eq "MyString"
+        expect(condition.interest_rate).to eq "MyString_Interest_Rate"
         expect(condition.max_loan_amount).to eq "MyString"
       end
 

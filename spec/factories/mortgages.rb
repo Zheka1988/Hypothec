@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :mortgage do
-    title { "MyString" }
-    description { "MyText" }
+    title { 'MyString' }
+    description { 'MyText' }
 
     trait :invalid do
       title { nil }

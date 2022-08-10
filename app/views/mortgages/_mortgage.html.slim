@@ -1,5 +1,7 @@
-div id="mortgage-#{mortgage.id}" class="my-2 p-1 bg-light"
-  div class="mortgage-title text-center"
+div id="mortgage-#{mortgage.id}" class='d-flex flex-row my-2 p-1 bg-light'
+  div class='mortgage-title text-center w-25'
     h3= mortgage.title
-  div class="mortgage-description"
+  div class='mortgage-description w-50 px-3'
     h5= mortgage.description
+  div class='mortgage-action w-25 text-center'
+    = link_to 'More', mortgage_path(mortgage)

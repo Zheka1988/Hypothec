@@ -1,4 +1,6 @@
 div class='mortgages w-100'
+  - if can?(:new, Mortgage)
+    = link_to 'New mortgage', new_mortgage_path
   - if @mortgages
     = render @mortgages
 

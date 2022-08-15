@@ -45,6 +45,7 @@ gem "bootsnap", require: false
 gem "slim-rails"
 gem "devise"
 gem 'bootstrap', '~> 5.1.3'
+gem 'cancancan'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

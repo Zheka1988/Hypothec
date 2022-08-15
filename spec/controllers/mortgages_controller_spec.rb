@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe MortgagesController, type: :controller do
   let(:mortgage) { create(:mortgage) }
+  let(:user) { create(:user) }
+  let(:admin) { create(:user, :admin) }
 
   describe 'GET #index' do
     let(:mortgages) { create_list(:mortgage, 3) }
@@ -30,54 +32,89 @@ RSpec.describe MortgagesController, type: :controller do
   end
 
   describe 'GET #new' do
-    before { get :new }
+    context 'as admin' do
+      before { login(admin) }
+      before { get :new }
 
-    it 'assigns the requested mortgage to @mortgage' do
-      expect(assigns(:mortgage)).to be_a_new(Mortgage)
+      it 'assigns the requested mortgage to @mortgage' do
+        expect(assigns(:mortgage)).to be_a_new(Mortgage)
+      end
+
+      it 'render new view' do
+        expect(response).to render_template :new
+      end
     end
 
-    it 'render new view' do
-      expect(response).to render_template :new
+    context 'as not admin' do
+      before { login(user) }
+      before { get :new }
+      
+      it 'atempt assigns the requested mortgage to @mortgage' do
+        expect(assigns(:mortgage)).to_not be_a_new(Mortgage)
+      end
+
+      it 'rendirect to root_path' do
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
+
+  describe 'POST #create' do
+    context 'As admin' do
+      before { login(admin) }
+      
+      context 'with valid attributes' do
+        it 'saves a new mortgage in the database' do
+          expect { post :create, params: { mortgage: attributes_for(:mortgage) } }.to change(Mortgage, :count).by(1)
+        end
+
+        it 'redirects to show view' do
+          post :create, params: { mortgage: attributes_for(:mortgage) }
+          expect(response).to redirect_to assigns(:mortgage)
+        end
+      end
+
+      context 'with invalid attributes' do
+        it 'does not save the mortgage' do
+          expect { post :create, params: { mortgage: attributes_for(:mortgage, :invalid) } }.to_not change(Mortgage, :count)
+        end
+
+        it 're-renders new view' do
+          post :create, params: { mortgage: attributes_for(:mortgage, :invalid) }
+          expect(response).to render_template :new
+        end     
+      end
+    end
+
+    context 'As not admin' do
+      before { login(user) }
+
+      it 'does not save the mortgage' do
+        expect { post :create, params: { mortgage: attributes_for(:mortgage) } }.to_not change(Mortgage, :count)
+      end
+
+      it 'rendirect to root_path' do
+        post :create, params: { mortgage: attributes_for(:mortgage) }
+        expect(response).to redirect_to root_path
+      end
     end
   end
 
   describe 'GET #edit' do
+    before { login(user) }
     before { get :edit, params: { id: mortgage } }
 
     it 'assigns the requested mortgage to @mortgage' do  
       expect(assigns(:mortgage)).to eq mortgage
     end
-    
+      
     it 'render edit view' do
       expect(response).to render_template :edit
-    end   
-  end
-
-  describe 'POST #create' do
-    context 'with valid attributes' do
-      it 'saves a new mortgage in the database' do
-        expect { post :create, params: { mortgage: attributes_for(:mortgage) } }.to change(Mortgage, :count).by(1)
-      end
-
-      it 'redirects to show view' do
-        post :create, params: { mortgage: attributes_for(:mortgage) }
-        expect(response).to redirect_to assigns(:mortgage)
-      end
-    end
-
-    context 'with invalid attributes' do
-      it 'does not save the mortgage' do
-        expect { post :create, params: { mortgage: attributes_for(:mortgage, :invalid) } }.to_not change(Mortgage, :count)
-      end
-
-      it 're-renders new view' do
-        post :create, params: { mortgage: attributes_for(:mortgage, :invalid) }
-        expect(response).to render_template :new
-      end     
     end
   end
 
   describe 'PATCH #update' do
+    before { login(user) }
     context 'with valid attributes' do
       it 'assigns the requested mortgage to @mortgage' do
         patch :update, params: { id: mortgage, mortgage: attributes_for(:mortgage) }  
@@ -115,6 +152,7 @@ RSpec.describe MortgagesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    before { login(user) }
     let!(:mortgage) { create(:mortgage) }
     
     it 'deletes the mortgage' do

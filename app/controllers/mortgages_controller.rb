@@ -1,8 +1,8 @@
 class MortgagesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_mortgage, only: [:show, :edit, :update, :destroy]
+  authorize_resource only: [:new, :create, :edit, :update]
 
-  authorize_resource only: [:new, :create]
+  before_action :load_mortgage, only: [:show, :edit, :update, :destroy]
 
   def index
     @mortgages = Mortgage.all
@@ -30,9 +30,9 @@ class MortgagesController < ApplicationController
 
   def update
     if @mortgage.update(mortgage_params)
-      redirect_to @mortgage
+      redirect_to @mortgage, notice: 'Mortgage update successfully'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

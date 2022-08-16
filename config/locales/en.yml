@@ -32,6 +32,6 @@
 en:
   unauthorized:
     manage:
-      all: "Only Admin can add a new mortgage"
-      user: "Only Admin can add a new mortgage"
+      all: "Only Admin has access rights"
+      user: "Only Admin has access rights"
       

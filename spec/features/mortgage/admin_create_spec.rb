@@ -44,7 +44,7 @@ feature 'Admin can create mortgage', %q{
     scenario 'can not get to mortgage creation page' do
       visit new_mortgage_path
 
-      expect(page).to have_content 'Only Admin can add a new mortgage'
+      expect(page).to have_content 'Only Admin has access rights'
     end
   end
 

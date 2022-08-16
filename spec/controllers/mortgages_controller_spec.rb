@@ -53,7 +53,7 @@ RSpec.describe MortgagesController, type: :controller do
         expect(assigns(:mortgage)).to_not be_a_new(Mortgage)
       end
 
-      it 'rendirect to root_path' do
+      it 'redirect to root_path' do
         expect(response).to redirect_to root_path
       end
     end
@@ -101,53 +101,88 @@ RSpec.describe MortgagesController, type: :controller do
   end
 
   describe 'GET #edit' do
-    before { login(user) }
-    before { get :edit, params: { id: mortgage } }
+    context 'as admin' do
+      before { login(admin) }
+      before { get :edit, params: { id: mortgage } }
 
-    it 'assigns the requested mortgage to @mortgage' do  
-      expect(assigns(:mortgage)).to eq mortgage
+      it 'assigns the requested mortgage to @mortgage' do  
+        expect(assigns(:mortgage)).to eq mortgage
+      end
+        
+      it 'render edit view' do
+        expect(response).to render_template :edit
+      end
     end
+
+    context 'as not admin' do
+      before { login(user) }
+      before { get :edit, params: { id: mortgage } }
       
-    it 'render edit view' do
-      expect(response).to render_template :edit
+      it 'atempt assigns the requested mortgage to @mortgage' do
+        expect(assigns(:mortgage)).to eq nil
+      end
+
+      it 'redirect to root_path' do
+        expect(response).to redirect_to root_path
+      end      
     end
   end
 
   describe 'PATCH #update' do
-    before { login(user) }
-    context 'with valid attributes' do
-      it 'assigns the requested mortgage to @mortgage' do
-        patch :update, params: { id: mortgage, mortgage: attributes_for(:mortgage) }  
-        expect(assigns(:mortgage)).to eq mortgage
+    context 'As admin' do
+      before { login(admin) }
+
+      context 'with valid attributes' do
+        it 'assigns the requested mortgage to @mortgage' do
+          patch :update, params: { id: mortgage, mortgage: attributes_for(:mortgage) }  
+          expect(assigns(:mortgage)).to eq mortgage
+        end
+
+        it 'changes mortgage attributes' do
+          patch :update, params: { id: mortgage, mortgage: { title: "new title", description: "new description" } }
+          mortgage.reload
+
+          expect(mortgage.title).to eq "new title"
+          expect(mortgage.description).to eq "new description"
+        end
+
+        it 'redirects to updated mortgage' do
+          patch :update, params: { id: mortgage, mortgage: attributes_for(:mortgage) }
+          expect(response).to redirect_to mortgage 
+        end
       end
 
-      it 'changes mortgage attributes' do
-        patch :update, params: { id: mortgage, mortgage: { title: "new title", description: "new description" } }
-        mortgage.reload
+      context 'with invalid attributes' do
+        before { patch :update, params: { id: mortgage, mortgage: attributes_for(:mortgage, :invalid) } }
+        
+        it 'does not save the mortgage' do
+          mortgage.reload
 
-        expect(mortgage.title).to eq "new title"
-        expect(mortgage.description).to eq "new description"
-      end
+          expect(mortgage.title).to eq "MyString"
+          expect(mortgage.description).to eq "MyText"
+        end
 
-      it 'redirects to updated mortgage' do
-        patch :update, params: { id: mortgage, mortgage: attributes_for(:mortgage) }
-        expect(response).to redirect_to mortgage 
+        it 're-renders edit view' do
+          expect(response).to render_template :edit
+        end 
       end
     end
 
-    context 'with invalid attributes' do
-      before { patch :update, params: { id: mortgage, mortgage: attributes_for(:mortgage, :invalid) } }
-      
+    context 'As not admin' do
+      before { login(user) }
+
       it 'does not save the mortgage' do
+        patch :update, params: { id: mortgage, mortgage: { title: "new title", description: "new description" } }
         mortgage.reload
 
         expect(mortgage.title).to eq "MyString"
         expect(mortgage.description).to eq "MyText"
       end
 
-      it 're-renders edit view' do
-        expect(response).to render_template :edit
-      end 
+      it 'rendirect to root_path' do
+        post :update, params: { id: mortgage, mortgage: attributes_for(:mortgage) }
+        expect(response).to redirect_to root_path
+      end      
     end
   end
 

@@ -12,6 +12,6 @@ class Ability
     can :read, Mortgage
 
     return unless user.admin?
-    can :create, Mortgage
+    can [:create, :update], Mortgage
   end
 end

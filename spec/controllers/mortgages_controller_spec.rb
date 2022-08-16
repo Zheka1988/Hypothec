@@ -187,16 +187,33 @@ RSpec.describe MortgagesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    before { login(user) }
     let!(:mortgage) { create(:mortgage) }
-    
-    it 'deletes the mortgage' do
-      expect { delete :destroy, params: { id: mortgage } }.to change(Mortgage, :count).by(-1)
+
+    context 'As admin' do
+      before { login(admin) }
+      
+      
+      it 'deletes the mortgage' do
+        expect { delete :destroy, params: { id: mortgage } }.to change(Mortgage, :count).by(-1)
+      end
+
+      it 'redirects to index' do
+        delete :destroy, params: { id: mortgage }
+        expect(response).to redirect_to mortgages_path
+      end
     end
 
-    it 'redirects to index' do
-      delete :destroy, params: { id: mortgage }
-      expect(response).to redirect_to mortgages_path
+    context 'As not admin' do
+      before { login(user) }
+
+      it 'not deletes the mortgage' do
+        expect { delete :destroy, params: { id: mortgage } }.to_not change(Mortgage, :count)
+      end
+
+      it 'rendirect to root_path' do
+        post :update, params: { id: mortgage, mortgage: attributes_for(:mortgage) }
+        expect(response).to redirect_to root_path
+      end   
     end
   end  
 end

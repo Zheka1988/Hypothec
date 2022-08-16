@@ -9,3 +9,6 @@ div id="mortgage-#{mortgage.id}" class='d-flex flex-row my-2 p-1 bg-light'
     - if can?(:edit, mortgage)
       div class='mx-2'
         = link_to 'Edit mortgage', edit_mortgage_path(mortgage)
+    - if can?(:destroy, mortgage)  
+      div
+        = link_to 'Delete mortgage', mortgage_path(mortgage), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }

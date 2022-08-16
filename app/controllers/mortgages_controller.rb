@@ -1,6 +1,6 @@
 class MortgagesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  authorize_resource only: [:new, :create, :edit, :update]
+  authorize_resource
 
   before_action :load_mortgage, only: [:show, :edit, :update, :destroy]
 

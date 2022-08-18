@@ -1,10 +1,11 @@
 class ConditionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  authorize_resource only: [:create, :update, :edit]  
   
   before_action :set_mortgage, only: [:create]
-  before_action :load_condition, only: [:destroy, :update]
+  before_action :load_condition, only: [:destroy, :update, :edit]
 
-  authorize_resource only: [:create]
+
   
   def create
     @condition = @mortgage.build_condition(condition_params)
@@ -15,11 +16,14 @@ class ConditionsController < ApplicationController
     end
   end
 
+  def edit
+  end
+  
   def update
     if @condition.update(condition_params)
-      redirect_to @condition.mortgage
+      redirect_to @condition.mortgage, notice: 'Condition update successfully'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

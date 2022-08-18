@@ -1,4 +1,7 @@
 div class='mortgage-condition px-3'
+  - if can?(:edit, Condition)
+    div
+      = link_to 'Edit condition', edit_condition_path(condition)
   - if condition.interest_rate || condition.interest_rate != ''
     div class='condition-interest-rate d-flex flex-row w-100'
       div class='title-field w-25 px-3'

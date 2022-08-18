@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :mortgages, shallow: true do
-    resources :conditions, only: [:create, :update, :destroy]
+    resources :conditions, only: [:create, :update, :destroy, :edit]
   end
 end

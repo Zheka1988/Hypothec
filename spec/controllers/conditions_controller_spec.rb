@@ -68,40 +68,86 @@ RSpec.describe ConditionsController, type: :controller do
     end
   end
 
-  describe 'PATH #update' do
-    before { login(user) }
+  describe 'GET #edit' do
+    context 'As admin' do
+      before { login(admin) }
+      before { get :edit, params: { id: condition } }
 
-    context 'with valid attributes' do
       it 'assigns the requested condition to @condition' do
-        patch :update, params: { id: condition, condition: attributes_for(:condition) }
         expect(assigns(:condition)).to eq condition
       end
 
-      it 'changes condition attributes' do
-        patch :update, params: { id: condition, condition: { interest_rate: '123', max_loan_amount: '321' } }
-        condition.reload
-
-        expect(condition.interest_rate).to eq '123'
-        expect(condition.max_loan_amount).to eq '321'
-      end
-
-      it 'redirects to updated mortgage' do
-        patch :update, params: { id: condition, condition: attributes_for(:condition) }
-        expect(response).to redirect_to condition.mortgage
+      it 'render edit view' do
+        expect(response).to render_template :edit
       end
     end
 
-    context 'with invalid attributes' do
-      before { patch :update, params: { id: condition, condition: attributes_for(:condition, :invalid) } }
-      
+    context 'As not admin' do
+      before { login(user) }
+      before { get :edit, params: { id: condition } }
+
+      it 'atempt assigns the requested condition to @condition' do
+        expect(assigns(:condition)).to eq nil
+      end
+
+      it 'redirect to root_path' do
+        expect(response).to redirect_to root_path
+      end         
+    end
+  end
+
+  describe 'PATH #update' do
+    before { login(admin) }
+    context 'As admin' do
+      context 'with valid attributes' do
+        it 'assigns the requested condition to @condition' do
+          patch :update, params: { id: condition, condition: attributes_for(:condition) }
+          expect(assigns(:condition)).to eq condition
+        end
+
+        it 'changes condition attributes' do
+          patch :update, params: { id: condition, condition: { interest_rate: '123', max_loan_amount: '321' } }
+          condition.reload
+
+          expect(condition.interest_rate).to eq '123'
+          expect(condition.max_loan_amount).to eq '321'
+        end
+
+        it 'redirects to updated mortgage' do
+          patch :update, params: { id: condition, condition: attributes_for(:condition) }
+          expect(response).to redirect_to condition.mortgage
+        end
+      end
+
+      context 'with invalid attributes' do
+        before { patch :update, params: { id: condition, condition: attributes_for(:condition, :invalid) } }
+        
+        it 'does not save the condition' do
+          condition.reload
+          expect(condition.interest_rate).to eq "MyString_Interest_Rate"
+          expect(condition.max_loan_amount).to eq "MyString"
+        end
+
+        it 're-renders edit view' do
+          expect(response).to render_template :edit
+        end  
+      end
+    end
+
+    context 'As not admin' do
+      before { login(user) }
+
       it 'does not save the condition' do
+        patch :update, params: { id: condition, condition: { interest_rate: "new interest rate", max_loan_amount: "new max loan amount" } }
         condition.reload
+
         expect(condition.interest_rate).to eq "MyString_Interest_Rate"
         expect(condition.max_loan_amount).to eq "MyString"
       end
 
-      it 're-renders edit view' do
-        expect(response).to render_template :edit
+      it 'redirect to root_path' do
+        patch :update, params: { id: condition, condition: attributes_for(:condition) }
+        expect(response).to redirect_to root_path
       end  
     end
   end

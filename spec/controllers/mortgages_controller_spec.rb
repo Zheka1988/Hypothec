@@ -184,7 +184,7 @@ RSpec.describe MortgagesController, type: :controller do
       end
 
       it 'rendirect to root_path' do
-        post :update, params: { id: mortgage, mortgage: attributes_for(:mortgage) }
+        patch :update, params: { id: mortgage, mortgage: attributes_for(:mortgage) }
         expect(response).to redirect_to root_path
       end      
     end

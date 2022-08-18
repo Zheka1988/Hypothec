@@ -4,5 +4,29 @@ div id="mortgage-#{@mortgage.id}" class='d-flex flex-column w-100 my-2 p-1 bg-li
   div class='mortgage-description px-3'
     h5= @mortgage.description
 
-  -if @mortgage.condition
+  - if @mortgage.condition&.id != nil
     = render @mortgage.condition
+  - else
+    - if can?(:new, Condition) 
+      = render 'shared/errors', resource: @condition
+
+      = form_with model: [@mortgage, @condition], class: 'form-group' do |f|
+        = f.label :interest_rate 
+        = f.text_field :interest_rate, class: 'form-control'
+        = f.label :max_loan_amount 
+        = f.text_field :max_loan_amount, class: 'form-control'
+        = f.label :max_loan_term 
+        = f.text_field :max_loan_term, class: 'form-control'
+        = f.label :max_age 
+        = f.text_field :max_age, class: 'form-control'
+        = f.label :income
+        = f.text_area :income, class: 'form-control'
+        = f.label :note
+        = f.text_area :note, class: 'form-control'
+        = f.label :an_initial_fee 
+        = f.text_field :an_initial_fee, class: 'form-control'
+        = f.label :experience_and_registration
+        = f.text_area :experience_and_registration, class: 'form-control'
+        = f.label :type_of_housing 
+        = f.text_field :type_of_housing, class: 'form-control'
+        = f.submit 'Add condition'

@@ -9,6 +9,7 @@ class MortgagesController < ApplicationController
   end
 
   def show
+    @condition = Condition.new
   end
 
   def new

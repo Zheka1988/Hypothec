@@ -1,13 +1,17 @@
 class ConditionsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  
   before_action :set_mortgage, only: [:create]
   before_action :load_condition, only: [:destroy, :update]
 
+  authorize_resource only: [:create]
+  
   def create
     @condition = @mortgage.build_condition(condition_params)
     if @condition.save
-      redirect_to @mortgage
+      redirect_to @mortgage, notice: 'Conditions create successfully'
     else
-      render :new
+      render 'mortgages/show', status: :unprocessable_entity
     end
   end
 

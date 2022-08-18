@@ -1,5 +1,5 @@
 div class='mortgage-condition px-3'
-  - if condition.interest_rate
+  - if condition.interest_rate || condition.interest_rate != ''
     div class='condition-interest-rate d-flex flex-row w-100'
       div class='title-field w-25 px-3'
         p= 'Interest rate'
@@ -11,43 +11,43 @@ div class='mortgage-condition px-3'
         p= 'Max loan amount'
       div class='value w-75 px-3'  
         p= condition.max_loan_amount
-  - if condition.max_loan_term 
+  - if condition.max_loan_term && !condition.max_loan_term.blank?
     div class='condition-max-loan-term d-flex flex-row w-100'
       div class='title-field w-25 px-3'
         p= 'Max loan term'
       div class='value w-75 px-3' 
         p= condition.max_loan_term
-  - if condition.max_age 
+  - if condition.max_age && !condition.max_age.blank?
     div class='condition-max-age d-flex flex-row w-100'
       div class='title-field w-25 px-3'
         p= 'Max age'
       div class='value w-75 px-3' 
         p= condition.max_age
-  - if condition.income 
+  - if condition.income && !condition.income.blank?  
     div class='condition-income d-flex flex-row w-100'
       div class='title-field w-25 px-3'
         p= 'Income'
       div class='value w-75 px-3' 
         p= condition.income
-  - if condition.note
+  - if condition.note && !condition.note.blank? 
     div class='condition-note d-flex flex-row w-100'
       div class='title-field w-25 px-3'
         p= 'Note'
       div class='value w-75 px-3'     
         p= condition.note
-  - if condition.an_initial_fee 
+  - if condition.an_initial_fee && !condition.an_initial_fee.blank? 
     div class='condition-an-initial-fee d-flex flex-row w-100'
       div class='title-field w-25 px-3'
         p= 'An initial fee'
       div class='value w-75 px-3'     
         p= condition.an_initial_fee
-  - if condition.experience_and_registration 
+  - if condition.experience_and_registration && !condition.experience_and_registration.blank? 
     div class='condition-experience-and-registration d-flex flex-row w-100'
       div class='title-field w-25 px-3'
         p= 'Experience and registration'
       div class='value w-75 px-3'     
         p= condition.experience_and_registration
-  - if condition.type_of_housing 
+  - if condition.type_of_housing && !condition.type_of_housing.blank? 
     div class='condition-type-of-housing d-flex flex-row w-100'
       div class='title-field w-25 px-3'
         p= 'Type of housing'

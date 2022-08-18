@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe MortgagesController, type: :controller do
-  let(:mortgage) { create(:mortgage) }
   let(:user) { create(:user) }
   let(:admin) { create(:user, :admin) }
-
+  let(:mortgage) { create(:mortgage) }
+  
   describe 'GET #index' do
     let(:mortgages) { create_list(:mortgage, 3) }
 
@@ -21,11 +21,15 @@ RSpec.describe MortgagesController, type: :controller do
 
   describe 'GET #show' do
     before { get :show, params: { id: mortgage } }
-
+      
     it 'assigns the requested mortgage to @mortgage' do  
       expect(assigns(:mortgage)).to eq mortgage
     end
-    
+      
+    it 'assigns new condition for mortgage' do
+      expect(assigns(:condition)).to be_a_new(Condition)
+    end
+
     it 'render show view' do
       expect(response).to render_template :show
     end

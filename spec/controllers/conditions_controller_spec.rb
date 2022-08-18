@@ -1,39 +1,61 @@
 require 'rails_helper'
 
 RSpec.describe ConditionsController, type: :controller do
+  let(:admin) { create(:user, :admin) }
+  let(:user) { create(:user) }
+
   let(:mortgage) { create :mortgage }
   let(:condition) { create :condition, mortgage: mortgage }
 
   describe 'POST #create' do
-    context 'with valid attributes' do
-      it 'saves a new condition in the database' do
-        expect { post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition) } }.to change(Condition, :count).by(1)
-      end
-      
-      it 'the condition is related to the mortgage' do
-        post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition) }
-        expect(assigns(:condition).mortgage_id).to eq mortgage.id
+    context 'As admin' do
+      before { login(admin) }
+
+      context 'with valid attributes' do
+        it 'saves a new condition in the database' do
+          expect { post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition) } }.to change(Condition, :count).by(1)
+        end
+        
+        it 'the condition is related to the mortgage' do
+          post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition) }
+          expect(assigns(:condition).mortgage_id).to eq mortgage.id
+        end
+
+        it 'redirect to show mortgage view' do
+          post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition) }
+          expect(response).to redirect_to assigns(:mortgage)
+        end
       end
 
-      it 'redirect to show mortgage view' do
-        post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition) }
-        expect(response).to redirect_to assigns(:mortgage)
+      context 'with invalid attributes' do
+        it 'does not save the condition' do
+          expect { post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition, :invalid) } }.to_not change(Condition, :count)
+        end
+        
+        it 'render to show mortgage view' do
+          post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition, :invalid) }
+          expect(response).to render_template 'mortgages/show'
+        end
       end
     end
 
-    context 'with invalid attributes' do
-      it 'does not save the condition' do
-        expect { post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition, :invalid) } }.to_not change(Condition, :count)
-      end
+    context 'As not admin' do
+      before { login(user) }
       
-      it 'render to new view' do
-        post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition, :invalid) }
-        expect(response).to render_template :new
+      it 'does not save the condition' do
+        expect { post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition) } }.to_not change(Condition, :count)
+      end
+
+      it 'rendirect to root_path' do
+        post :create, params: { mortgage_id: mortgage, condition: attributes_for(:condition) }
+        expect(response).to redirect_to root_path
       end
     end
   end
 
   describe 'DELETE #destroy' do
+    before { login(user) }
+
     let!(:condition) { create :condition, mortgage: mortgage }
     
     it 'deletes the condition' do
@@ -47,6 +69,8 @@ RSpec.describe ConditionsController, type: :controller do
   end
 
   describe 'PATH #update' do
+    before { login(user) }
+
     context 'with valid attributes' do
       it 'assigns the requested condition to @condition' do
         patch :update, params: { id: condition, condition: attributes_for(:condition) }

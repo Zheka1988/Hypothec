@@ -23,7 +23,7 @@ class MortgagesController < ApplicationController
     @mortgage = Mortgage.new(mortgage_params)
 
     if @mortgage.save
-      redirect_to @mortgage      
+      redirect_to @mortgage, notice: 'Mortgage create successfully'     
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class MortgagesController < ApplicationController
 
   def destroy
     @mortgage.destroy
-    redirect_to mortgages_path
+    redirect_to mortgages_path, notice: 'Mortgage delete successfully' 
   end
 
   private

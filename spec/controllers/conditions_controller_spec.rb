@@ -54,17 +54,30 @@ RSpec.describe ConditionsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    before { login(user) }
-
+    before { login(admin) }
     let!(:condition) { create :condition, mortgage: mortgage }
-    
-    it 'deletes the condition' do
-      expect { delete :destroy, params: { id: condition } }.to change(Condition, :count).by(-1)  
+
+    context 'As admin' do    
+      it 'deletes the condition' do
+        expect { delete :destroy, params: { id: condition } }.to change(Condition, :count).by(-1)  
+      end
+
+      it 'render to show' do
+        delete :destroy, params: { id: condition }
+        expect(response).to redirect_to condition.mortgage
+      end
     end
 
-    it 'render to show' do
-      delete :destroy, params: { id: condition }
-      expect(response).to redirect_to condition.mortgage
+    context 'As not admin' do
+      before { login(user) }
+      it 'not deletes the condition' do
+        expect { delete :destroy, params: { id: condition } }.to_not change(Condition, :count)
+      end
+
+      it 'rendirect to root_path' do
+        delete :destroy, params: { id: condition }
+        expect(response).to redirect_to root_path
+      end     
     end
   end
 

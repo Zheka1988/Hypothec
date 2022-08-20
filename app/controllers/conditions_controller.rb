@@ -1,11 +1,9 @@
 class ConditionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  authorize_resource only: [:create, :update, :edit]  
+  authorize_resource
   
   before_action :set_mortgage, only: [:create]
   before_action :load_condition, only: [:destroy, :update, :edit]
-
-
   
   def create
     @condition = @mortgage.build_condition(condition_params)
@@ -28,8 +26,9 @@ class ConditionsController < ApplicationController
   end
 
   def destroy
+    @mortgage = @condition.mortgage
     @condition.destroy
-    redirect_to @condition.mortgage
+    redirect_to @mortgage, status: :see_other, notice: 'Condition delete successfully'   
   end
 
   private

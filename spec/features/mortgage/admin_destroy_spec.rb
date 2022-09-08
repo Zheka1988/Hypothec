@@ -8,7 +8,7 @@ feature 'Admin can delete mortgage' do
   scenario 'Admin can delete mortgage' do
     sign_in(admin)
     visit mortgages_path
-    click_on 'Delete mortgage'
+    click_on 'Delete'
 
     expect(page).to_not have_content mortgage.title
   end

@@ -1,14 +1,14 @@
-div id="mortgage-#{mortgage.id}" class='d-flex flex-row my-2 p-1 bg-light'
+div id="mortgage-#{mortgage.id}" class='shadow d-flex flex-row my-2 p-1 border rounded bg-white'
   div class='mortgage-title text-center w-25'
     h3= mortgage.title
   div class='mortgage-description w-50 px-3'
     h5= mortgage.description
-  div class='mortgage-action w-25 text-center d-flex flex-row'
-    div 
-      = link_to 'More', mortgage_path(mortgage)
+  div class='mortgage-action w-25 text-center d-flex flex-column justify-content-around'
+    div
+      = link_to 'More', mortgage_path(mortgage), class: 'link-action-mortgage'
     - if can?(:edit, mortgage)
-      div class='mx-2'
-        = link_to 'Edit mortgage', edit_mortgage_path(mortgage)
+      div
+        = link_to 'Edit', edit_mortgage_path(mortgage), class: 'link-action-mortgage'
     - if can?(:destroy, mortgage)  
       div
-        = link_to 'Delete mortgage', mortgage_path(mortgage), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }
+        = link_to 'Delete', mortgage_path(mortgage), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'link-action-mortgage'

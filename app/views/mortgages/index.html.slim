@@ -1,6 +1,9 @@
-div class='mortgages w-100'
-  - if can?(:new, Mortgage)
-    = link_to 'New mortgage', new_mortgage_path
-  - if @mortgages
-    = render @mortgages
-
+div class='mortgages w-100 p-2 d-flex flex-column bg-light'
+  div class='text-center border-bottom'
+    h2= "All mortgages"
+  div class='d-flex justify-content-end mt-2'   
+    - if can?(:new, Mortgage)
+      = link_to 'New mortgage', new_mortgage_path, class: 'btn btn-secondary'
+  div
+    - if @mortgages
+      = render @mortgages

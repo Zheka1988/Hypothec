@@ -1,0 +1,8 @@
+= render 'shared/errors', resource: @mortgage
+
+= form_with model: @mortgage, class: 'form-group' do |f|
+  = f.label :title
+  = f.text_field :title, class: 'form-control'
+  = f.label :description
+  = f.text_area :description, class: 'form-control'
+  = f.submit "#{resource[1]} mortgage", class: 'btn btn-primary mt-2'

@@ -12,7 +12,7 @@ feature 'Admin can edit mortgage', %q{
     before do
       sign_in(admin)
       visit mortgages_path
-      click_on 'Edit mortgage'
+      click_on 'Edit'
     end
 
     scenario 'can edit mortgage' do

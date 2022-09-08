@@ -1,0 +1,23 @@
+div
+  = render 'shared/errors', resource: @condition
+
+  = form_with model: [@mortgage, @condition], class: 'form-group' do |f|
+    = f.label :interest_rate 
+    = f.text_field :interest_rate, class: 'form-control'
+    = f.label :max_loan_amount 
+    = f.text_field :max_loan_amount, class: 'form-control'
+    = f.label :max_loan_term 
+    = f.text_field :max_loan_term, class: 'form-control'
+    = f.label :max_age 
+    = f.text_field :max_age, class: 'form-control'
+    = f.label :income
+    = f.text_area :income, class: 'form-control'
+    = f.label :note
+    = f.text_area :note, class: 'form-control'
+    = f.label :an_initial_fee 
+    = f.text_field :an_initial_fee, class: 'form-control'
+    = f.label :experience_and_registration
+    = f.text_area :experience_and_registration, class: 'form-control'
+    = f.label :type_of_housing 
+    = f.text_field :type_of_housing, class: 'form-control'
+    = f.submit "#{resource[2]} condition", class: 'btn btn-primary mt-2'

@@ -17,7 +17,7 @@ feature 'Only Admin can edit condition for mortgage' do
     scenario 'can edit condition for mortgage' do
       fill_in 'Interest rate', with: 'new interest rate'
       fill_in 'Note', with: 'new note'
-      click_on 'Change condition'
+      click_on 'Update condition'
 
       expect(page).to have_content 'Condition update successfully'
       expect(page).to have_content 'new interest rate'
@@ -27,7 +27,7 @@ feature 'Only Admin can edit condition for mortgage' do
     scenario 'can not edit condition with errors for mortgage' do
       fill_in 'Interest rate', with: ''
       fill_in 'Max loan amount', with: ''
-      click_on 'Change condition'
+      click_on 'Update condition'
 
       expect(page).to have_content "Interest rate can't be blank"
       expect(page).to have_content "Max loan amount can't be blank"      

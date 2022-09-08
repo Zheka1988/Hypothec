@@ -1,9 +1,7 @@
-div
-  = render 'shared/errors', resource: @mortgage
-  
-  = form_with model: @mortgage, class: 'form-group' do |f|
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
-    = f.label :description
-    = f.text_area :description, class: 'form-control'
-    = f.submit 'Add mortgage'
+div class='new-mortgage w-100 bg-light p-2 d-flex flex-column'
+  div class='text-center border-bottom'
+    h2= "New mortgage"
+  div class='d-flex justify-content-end mt-2'
+    = link_to 'Main', mortgages_path ,class: 'btn btn-secondary'
+  div
+    = render 'form', resource: [@mortgage, "Add"]

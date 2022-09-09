@@ -97,7 +97,7 @@ RSpec.describe MortgagesController, type: :controller do
         expect { post :create, params: { mortgage: attributes_for(:mortgage) } }.to_not change(Mortgage, :count)
       end
 
-      it 'rendirect to root_path' do
+      it 'redirect to root_path' do
         post :create, params: { mortgage: attributes_for(:mortgage) }
         expect(response).to redirect_to root_path
       end

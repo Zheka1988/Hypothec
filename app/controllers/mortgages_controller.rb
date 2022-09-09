@@ -21,7 +21,7 @@ class MortgagesController < ApplicationController
 
   def create
     @mortgage = Mortgage.new(mortgage_params)
-
+    
     if @mortgage.save
       redirect_to @mortgage, notice: 'Mortgage create successfully'     
     else
@@ -30,6 +30,7 @@ class MortgagesController < ApplicationController
   end
 
   def update
+    @mortgage.title_banks_partners.clear unless mortgage_params.include?(:title_banks_partners)
     if @mortgage.update(mortgage_params)
       redirect_to @mortgage, notice: 'Mortgage update successfully'
     else
@@ -48,6 +49,9 @@ class MortgagesController < ApplicationController
   end
 
   def mortgage_params
-    params.require(:mortgage).permit(:title, :description)
+    params.require(:mortgage).permit(:title, 
+                                     :description, 
+                                     :type_mortgage, 
+                                     title_banks_partners: [])
   end
 end

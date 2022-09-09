@@ -5,4 +5,28 @@
   = f.text_field :title, class: 'form-control'
   = f.label :description
   = f.text_area :description, class: 'form-control'
+  = f.collection_radio_buttons :type_mortgage, Mortgage.type_mortgages, :first, :first do |type|
+    div class='form-check form-check-inline mt-2'
+      = type.radio_button class: 'form-check-input'
+      = type.label class: 'form-check-label'
+  br
+
+  div class='border p-2'
+    div class='text-center'
+      h5= 'Banks partners'
+    div
+      = f.collection_check_boxes :title_banks_partners, 
+                                 ['HalykBank', 'SberBank', 'KaspiBank', 'OtbasyBank',
+                                  'First Heartland Jusan Bank', 'ForteBank', 'BankCenterCredit',
+                                  'EurasianBank', 'BankRBK', 'CitiBank', 'Eco Center Bank',
+                                  'AltynBank', 'VTB Bank', 'Home Credit Bank', 'HurBank',
+                                  'Bank of China Limited', 'Bank Freedom Finance',
+                                  'Industrial and Commercial Bank of China', 'KZI Bank',
+                                  'Shinhan Bank', 'Al Hilal Bank', 'ZamanBank'], :itself, :itself, include_hidden: false do |b|
+        div class='form-check form-check-inline mt-2'
+          = b.label class: 'form-check-label'
+          = b.check_box class: 'form-check-input'
+    
   = f.submit "#{resource[1]} mortgage", class: 'btn btn-primary mt-2'
+
+                     

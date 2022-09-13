@@ -8,10 +8,10 @@ class Condition < ApplicationRecord
 
   def validate_value_interest_rate
     count = 0
-    name_attributes = [] 
     Condition.attribute_names.each do |name_attribute|
       if name_attribute.include?('value_interest_rate') && send(name_attribute) != nil
         count += 1
+        break
       end
     end
 

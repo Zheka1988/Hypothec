@@ -13,7 +13,9 @@ feature 'Only Admin can create condition for the mortgage' do
 
     scenario 'can create condition for mortgage' do
       fill_in 'Interest rate', with: '500'
+      fill_in 'Value interest rate with commision', with: 2.5
       fill_in 'Max loan amount', with: '300000'
+      fill_in 'Value max loan amount', with: 50
       fill_in 'Note', with: 'blablabla'
       click_on 'Add condition'
 

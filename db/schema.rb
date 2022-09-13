@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_08_030702) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_12_054111) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_030702) do
     t.bigint "mortgage_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "value_interest_rate_with_commision"
+    t.float "value_interest_rate_without_commision"
+    t.float "value_interest_rate_with_proof_of_income"
+    t.float "value_interest_rate_without_proof_of_income"
+    t.float "value_interest_rate_with_commision_with_proof_of_income"
+    t.float "value_interest_rate_with_commision_without_proof_of_income"
+    t.float "value_interest_rate_without_commision_with_proof_of_income"
+    t.float "value_interest_rate_without_commision_without_proof_of_income"
+    t.integer "value_max_loan_amount"
+    t.integer "value_max_loan_term"
+    t.integer "value_max_age"
+    t.integer "value_min_an_initial_fee"
+    t.integer "value_max_an_initial_fee"
+    t.integer "value_income"
+    t.float "value_loan_processing_fee"
+    t.float "value_application_fee"
+    t.float "value_arly_redemption_fee"
+    t.string "additional_expenses"
+    t.float "value_additional_expenses"
+    t.string "pledge"
+    t.string "insurance"
+    t.float "value_insurance"
     t.index ["mortgage_id"], name: "index_conditions_on_mortgage_id"
   end
 

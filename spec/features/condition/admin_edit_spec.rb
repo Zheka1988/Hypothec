@@ -26,11 +26,11 @@ feature 'Only Admin can edit condition for mortgage' do
 
     scenario 'can not edit condition with errors for mortgage' do
       fill_in 'Interest rate', with: ''
-      fill_in 'Max loan amount', with: ''
+      fill_in 'Value max loan amount', with: ''
       click_on 'Update condition'
 
       expect(page).to have_content "Interest rate can't be blank"
-      expect(page).to have_content "Max loan amount can't be blank"      
+      expect(page).to have_content "Value max loan amount can't be blank"      
     end
 
   end

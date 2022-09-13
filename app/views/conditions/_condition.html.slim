@@ -4,49 +4,176 @@ div class='mortgage-condition d-flex flex-column'
     - if can?(:edit, Condition)
       = link_to 'Edit condition', edit_condition_path(condition),  class: 'btn btn-secondary mx-2'
       = link_to 'Delete condition', condition_path(condition), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete },  class: 'btn btn-secondary'
-  
-  - if condition.interest_rate || condition.interest_rate != ''
-    div class='condition-interest-rate d-flex flex-row w-100'
+
+  div class='condition-interest-rate border mt-2'
+    div class='condition-description-interest-rate d-flex flex-row w-100 shadow'
       div class='title-field w-25 px-3'
         p= 'Interest rate'
-      div class='value w-75 px-3'  
+      div class='content-field w-75 px-3 '  
         p= condition.interest_rate
-  - if condition.max_loan_amount      
-    div class='condition-max-loan-amount d-flex flex-row w-100'
+    div class='condition-value-interest-rate d-flex flex-wrap justify-content-center w-100 mt-2'
+      - if condition.value_interest_rate_with_commision  
+        div class='d-flex flex-column text-center shadow m-2 p-1'
+          div class='title-field'
+            p= 'Value with commision'
+          div class='content-field'
+            p= condition.value_interest_rate_with_commision
+      - if condition.value_interest_rate_without_commision
+        div class='d-flex flex-column text-center shadow m-2 p-1'
+          div class='title-field'
+            p= 'Value without commision'
+          div class='content-field'
+            p= condition.value_interest_rate_without_commision
+      - if condition.value_interest_rate_with_proof_of_income
+        div class='d-flex flex-column text-center shadow m-2 p-1'
+          div class='title-field'
+            p= 'Value with proof of income'
+          div class='content-field'
+            p= condition.value_interest_rate_with_proof_of_income
+      - if condition.value_interest_rate_without_proof_of_income
+        div class='d-flex flex-column text-center shadow m-2 p-1'
+          div class='title-field'
+            p= 'Value without proof of income'
+          div class='content-field'
+            p= condition.value_interest_rate_without_proof_of_income
+      - if condition.value_interest_rate_with_commision_with_proof_of_income
+        div class='d-flex flex-column text-center shadow m-2 p-1'
+          div class='title-field'
+            p= 'Value with commision with proof of income'
+          div class='content-field'
+            p= condition.value_interest_rate_with_commision_with_proof_of_income
+      - if condition.value_interest_rate_with_commision_without_proof_of_income
+        div class='d-flex flex-column text-center shadow m-2 p-1'
+          div class='title-field'
+            p= 'Value with commision without proof of income'
+          div class='content-field'
+            p= condition.value_interest_rate_with_commision_without_proof_of_income
+      - if condition.value_interest_rate_without_commision_with_proof_of_income
+        div class='d-flex flex-column text-center shadow m-2 p-1'
+          div class='title-field'
+            p= 'Value without commision with proof of income'
+          div class='content-field'
+            p= condition.value_interest_rate_without_commision_with_proof_of_income
+      - if condition.value_interest_rate_without_commision_without_proof_of_income
+        div class='d-flex flex-column text-center shadow m-2 p-1'
+          div class='title-field'
+            p= 'Value without commision without proof of income'
+          div class='content-field'
+            p= condition.value_interest_rate_without_commision_without_proof_of_income
+  div class='condition-max-loan-amount mt-2'
+    - if condition.max_loan_amount && !condition.max_loan_amount.blank?     
+      div class='condition-max-loan-amount d-flex flex-row w-100'
+        div class='title-field w-25 px-3'
+          p= 'Max loan amount'
+        div class='content-field w-75 px-3'  
+          p= condition.max_loan_amount
+    div class='condition-value-max-loan-amount d-flex flex-row w-100'
       div class='title-field w-25 px-3'
-        p= 'Max loan amount'
-      div class='value w-75 px-3'  
-        p= condition.max_loan_amount
+        p= 'Value max loan amount'
+      div class='content-field w-75 px-3'  
+        p= condition.value_max_loan_amount
   - if condition.max_loan_term && !condition.max_loan_term.blank?
-    div class='condition-max-loan-term d-flex flex-row w-100'
+    div class='condition-max-loan-term d-flex flex-row w-100 mt-2'
       div class='title-field w-25 px-3'
         p= 'Max loan term'
-      div class='value w-75 px-3' 
+      div class='content-field w-75 px-3' 
         p= condition.max_loan_term
+  - if condition.value_max_loan_term
+    div class='condition-value-max-loan-term d-flex flex-row w-100 mt-2'
+      div class='title-field w-25 px-3'
+        p= 'Value max loan term'
+      div class='content-field w-75 px-3' 
+        p= condition.value_max_loan_term
   - if condition.max_age && !condition.max_age.blank?
-    div class='condition-max-age d-flex flex-row w-100'
+    div class='condition-max-age d-flex flex-row w-100 mt-2'
       div class='title-field w-25 px-3'
         p= 'Max age'
-      div class='value w-75 px-3' 
+      div class='content-field w-75 px-3' 
         p= condition.max_age
+  - if condition.value_max_age
+    div class='condition-value-max-age d-flex flex-row w-100 mt-2'
+      div class='title-field w-25 px-3'
+        p= 'Value max age'
+      div class='content-field w-75 px-3' 
+        p= condition.value_max_age
   - if condition.income && !condition.income.blank?  
-    div class='condition-income d-flex flex-row w-100'
+    div class='condition-income d-flex flex-row w-100 mt-2'
       div class='title-field w-25 px-3'
         p= 'Income'
-      div class='value w-75 px-3' 
+      div class='content-field w-75 px-3' 
         p= condition.income
-  - if condition.note && !condition.note.blank? 
-    div class='condition-note d-flex flex-row w-100'
+  - if condition.value_income 
+    div class='condition-value-income d-flex flex-row w-100 mt-2'
       div class='title-field w-25 px-3'
-        p= 'Note'
-      div class='value w-75 px-3'     
-        p= condition.note
+        p= 'Value income'
+      div class='content-field w-75 px-3' 
+        p= condition.value_income
   - if condition.an_initial_fee && !condition.an_initial_fee.blank? 
-    div class='condition-an-initial-fee d-flex flex-row w-100'
+    div class='condition-an-initial-fee d-flex flex-row w-100 mt-2'
       div class='title-field w-25 px-3'
         p= 'An initial fee'
-      div class='value w-75 px-3'     
+      div class='content-field w-75 px-3'     
         p= condition.an_initial_fee
+  - if condition.value_min_an_initial_fee
+    div class='condition-value-min-an-initial-fee d-flex flex-row w-100 mt-2'
+      div class='title-field w-25 px-3'
+        p= 'Value min an initial fee'
+      div class='content-field w-75 px-3'     
+        p= condition.value_min_an_initial_fee
+  - if condition.value_max_an_initial_fee
+    div class='condition-value-max-an-initial-fee d-flex flex-row w-100 mt-2'
+      div class='title-field w-25 px-3'
+        p= 'Value max an initial fee'
+      div class='content-field w-75 px-3'     
+        p= condition.value_max_an_initial_fee
+  - if condition.additional_expenses && !condition.additional_expenses.blank?
+    div class='condition-additional-expenses d-flex flex-row w-100 mt-2'
+      div class='title-field w-25 px-3'
+        p= 'Additional expenses'
+      div class='content-field w-75 px-3'     
+        p= condition.additional_expenses    
+  - if condition.value_additional_expenses
+    div class='condition-value-additional-expenses d-flex flex-row w-100 mt-2'
+      div class='title-field w-25 px-3'
+        p= 'Value additional expenses'
+      div class='content-field w-75 px-3'     
+        p= condition.value_additional_expenses 
+  - if condition.value_loan_processing_fee
+    div class='condition-value-loan-processing-fee d-flex flex-row w-100 mt-2'
+      div class='title-field w-25 px-3'
+        p= 'Value loan processing fee'
+      div class='content-field w-75 px-3'     
+        p= condition.value_loan_processing_fee
+  - if condition.value_application_fee
+    div class='condition-value-application-fee d-flex flex-row w-100 mt-2'
+      div class='title-field w-25 px-3'
+        p= 'Value application fee'
+      div class='content-field w-75 px-3'     
+        p= condition.value_application_fee    
+  - if condition.value_arly_redemption_fee
+    div class='condition-value-arly-redemption-fee d-flex flex-row w-100 mt-2'
+      div class='title-field w-25 px-3'
+        p= 'Value arly redemption fee'
+      div class='content-field w-75 px-3'     
+        p= condition.value_arly_redemption_fee   
+  - if condition.pledge && !condition.pledge.blank? 
+    div class='condition-pledge d-flex flex-row w-100'
+      div class='title-field w-25 px-3'
+        p= 'Pledge'
+      div class='value w-75 px-3'     
+        p= condition.pledge
+  - if condition.insurance && !condition.insurance.blank? 
+    div class='condition-insurance d-flex flex-row w-100'
+      div class='title-field w-25 px-3'
+        p= 'Insurance'
+      div class='value w-75 px-3'     
+        p= condition.insurance
+  - if condition.value_insurance && !condition.value_insurance.blank? 
+    div class='condition-value-insurance d-flex flex-row w-100'
+      div class='title-field w-25 px-3'
+        p= 'Value insurance'
+      div class='value w-75 px-3'     
+        p= condition.value_insurance
   - if condition.experience_and_registration && !condition.experience_and_registration.blank? 
     div class='condition-experience-and-registration d-flex flex-row w-100'
       div class='title-field w-25 px-3'
@@ -59,3 +186,10 @@ div class='mortgage-condition d-flex flex-column'
         p= 'Type of housing'
       div class='value w-75 px-3'     
         p= condition.type_of_housing
+  - if condition.note && !condition.note.blank? 
+    div class='condition-note d-flex flex-row w-100'
+      div class='title-field w-25 px-3'
+        p= 'Note'
+      div class='value w-75 px-3'     
+        p= condition.note
+

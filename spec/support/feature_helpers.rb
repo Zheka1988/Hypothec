@@ -6,23 +6,15 @@ module FeatureHelpers
     click_button 'Log in'
   end
 
-  def can_create_calculation_for_all_mortgages
+  def fill_in_the_fields_for_calculation
     fill_in 'Apartment price', with: 21000000
     fill_in 'Accumulation', with: 1000000
     fill_in 'Rental cost', with: 110000
     fill_in 'Monthly savings', with: 100000
-
-    click_on 'Calculate'
   end
 
-  def can_create_calculation_for_selected_mortgages(mortgages)
-    fill_in 'Apartment price', with: 21000000
-    fill_in 'Accumulation', with: 1000000
-    fill_in 'Rental cost', with: 110000
-    fill_in 'Monthly savings', with: 100000
+  def select_mortgages(mortgages)
     page.check(mortgages.first.title)
     page.check(mortgages.last.title)
-
-    click_on 'Calculate'
   end
 end

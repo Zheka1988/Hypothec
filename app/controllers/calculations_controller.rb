@@ -2,7 +2,15 @@ class CalculationsController < ApplicationController
   authorize_resource
   
   def new
-    @calculation = Calculation.new
+    if !params[:page] || params[:page] == 'index'
+      @calculation = Calculation.new
+    elsif params[:page] =~ /^(mortgage-)\d{1,4}$/ && Mortgage.find(params[:page].split("-").last)
+      @calculation = Calculation.new(mortgage_ids:[params[:page].split("-").last])
+      @mortgage = Mortgage.find(params[:page].split("-").last)
+    else
+      @calculation = Calculation.new
+      @calculation.errors.add(:mortgage_ids, 'invalid values')
+    end
   end
 
   def show

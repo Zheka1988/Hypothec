@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Any user can create calculation for selected mortgages' do
+feature 'Any user can create calculation for a mortgage on the page on which it is located ' do
   given(:user) { create(:user) }
   given(:admin) { create(:user, :admin) }
 
@@ -9,12 +9,12 @@ feature 'Any user can create calculation for selected mortgages' do
   context 'Admin' do
     before do 
       sign_in(admin)
-      visit new_calculation_path
+      visit mortgage_path(mortgages.first)
+      click_on 'Calculate'
     end 
 
     scenario 'can create calculation' do
       fill_in_the_fields_for_calculation
-      select_mortgages(mortgages)
 
       click_on 'Calculate'
 
@@ -22,7 +22,9 @@ feature 'Any user can create calculation for selected mortgages' do
       expect(page).to have_content '1000000'
       expect(page).to have_content '110000'
       expect(page).to have_content '100000'
+      expect(page).to have_content mortgages.first.title
       expect(page).to_not have_content mortgages.second.title
+      expect(page).to_not have_content mortgages.last.title
     end
 
     scenario 'can not create calculation with errors' do
@@ -34,13 +36,12 @@ feature 'Any user can create calculation for selected mortgages' do
 
   context 'No admin' do
     before do 
-      sign_in(user)
-      visit new_calculation_path
+      visit mortgage_path(mortgages.first)
+      click_on 'Calculate'
     end 
 
     scenario 'can create calculation' do
       fill_in_the_fields_for_calculation
-      select_mortgages(mortgages)
 
       click_on 'Calculate'
       
@@ -48,7 +49,9 @@ feature 'Any user can create calculation for selected mortgages' do
       expect(page).to have_content '1000000'
       expect(page).to have_content '110000'
       expect(page).to have_content '100000'
+      expect(page).to have_content mortgages.first.title
       expect(page).to_not have_content mortgages.second.title
+      expect(page).to_not have_content mortgages.last.title
     end
 
     scenario 'can not create calculation with errors' do
@@ -59,11 +62,13 @@ feature 'Any user can create calculation for selected mortgages' do
   end
 
   context 'Unauthorized user' do
-    before { visit new_calculation_path }
+    before do 
+      visit mortgage_path(mortgages.first)
+      click_on 'Calculate'
+    end
     
     scenario 'can create calculation' do
       fill_in_the_fields_for_calculation
-      select_mortgages(mortgages)
 
       click_on 'Calculate'
 
@@ -72,6 +77,7 @@ feature 'Any user can create calculation for selected mortgages' do
       expect(page).to have_content '110000'
       expect(page).to have_content '100000'
       expect(page).to_not have_content mortgages.second.title
+      expect(page).to_not have_content mortgages.last.title
     end
 
     scenario 'can not create calculation with errors' do

@@ -13,7 +13,9 @@ feature 'Any user can create calculation for all mortgages' do
     end 
 
     scenario 'can create calculation' do
-      can_create_calculation_for_all_mortgages
+      fill_in_the_fields_for_calculation
+
+      click_on 'Calculate'
       
       expect(page).to have_content '21000000'
       expect(page).to have_content '1000000'
@@ -38,7 +40,9 @@ feature 'Any user can create calculation for all mortgages' do
     end 
 
     scenario 'can create calculation' do
-      can_create_calculation_for_all_mortgages
+      fill_in_the_fields_for_calculation
+
+      click_on 'Calculate'
       
       expect(page).to have_content '21000000'
       expect(page).to have_content '1000000'
@@ -60,7 +64,9 @@ feature 'Any user can create calculation for all mortgages' do
     before { visit new_calculation_path }
     
     scenario 'can create calculation' do
-      can_create_calculation_for_all_mortgages
+      fill_in_the_fields_for_calculation
+
+      click_on 'Calculate'
 
       expect(page).to have_content '21000000'
       expect(page).to have_content '1000000'

@@ -1,0 +1,14 @@
+div class='d-flex flex-column'
+  div
+    p= @calculation.apartment_price
+  div
+    p= @calculation.accumulation
+  div
+    p= @calculation.rental_cost
+  div
+    p= @calculation.monthly_savings
+
+div class='d-flex flex-column'
+  - @calculation.calculated_values.each do |key, value|
+    div
+      h4= Mortgage.find(key).title

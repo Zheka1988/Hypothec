@@ -1,0 +1,27 @@
+div class='new-calculation w-100 bg-light p-2 d-flex flex-column'
+  div class='text-center border-bottom'
+    h2= "New calculation"
+  div class='d-flex justify-content-end mt-2'
+    = link_to 'Main', mortgages_path ,class: 'btn btn-secondary'
+
+  div
+    = render 'shared/errors', resource: @calculation
+
+    = form_with model: @calculation, class: 'form-group' do |f|
+      = f.label :apartment_price
+      = f.text_field :apartment_price, class: 'form-control'
+      = f.label :accumulation
+      = f.text_field :accumulation, class: 'form-control'
+      = f.label :rental_cost
+      = f.text_field :rental_cost, class: 'form-control'
+      = f.label :monthly_savings
+      = f.text_field :monthly_savings, class: 'form-control'
+      div class='border p-2 mt-2'
+        div class='text-center'
+          h5= 'Select title of mortgages (the default will be calculation for all)'
+        div
+          = f.collection_check_boxes :mortgage_ids, Mortgage.all, :id, :title, include_hidden: false do |b|
+            div class='form-check form-check-inline mt-2'
+              = b.label class: 'form-check-label'
+              = b.check_box class: 'form-check-input'            
+      = f.submit 'Calculate', class: 'btn btn-primary mt-2'

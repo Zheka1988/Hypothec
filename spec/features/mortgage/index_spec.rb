@@ -13,14 +13,16 @@ feature 'Any user can view the list of mortgages', %q{
     sign_in(user)
     visit mortgages_path
 
-    expect(page).to have_content "MyString", count: 3
+    expect(page).to have_content mortgages.first.title
+    expect(page).to have_content mortgages.last.title
     expect(page).to have_content "MyText", count: 3 
   end
   
   scenario 'Unauthenticated user can view the list of mortgages' do
     visit mortgages_path
 
-    expect(page).to have_content "MyString", count: 3
+    expect(page).to have_content mortgages.first.title
+    expect(page).to have_content mortgages.last.title
     expect(page).to have_content "MyText", count: 3 
   end
 end

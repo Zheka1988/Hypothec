@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :mortgages, shallow: true do
     resources :conditions, only: [:create, :update, :destroy, :edit]
   end
+
+  resources :calculations
 end

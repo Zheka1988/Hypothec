@@ -162,7 +162,7 @@ RSpec.describe MortgagesController, type: :controller do
         it 'does not save the mortgage' do
           mortgage.reload
 
-          expect(mortgage.title).to eq "MyString"
+          expect(mortgage.title).to eq mortgage.title
           expect(mortgage.description).to eq "MyText"
         end
 
@@ -179,7 +179,7 @@ RSpec.describe MortgagesController, type: :controller do
         patch :update, params: { id: mortgage, mortgage: { title: "new title", description: "new description" } }
         mortgage.reload
 
-        expect(mortgage.title).to eq "MyString"
+        expect(mortgage.title).to eq mortgage.title
         expect(mortgage.description).to eq "MyText"
       end
 

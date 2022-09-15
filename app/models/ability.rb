@@ -6,12 +6,14 @@ class Ability
   def initialize(user)
     user ||= User.new
     
-    can :read, [Mortgage, Condition], published: true
+    can :read, [Mortgage, Condition]
+    can :manage, Calculation
 
     return unless user.present?
     can :read, [Mortgage, Condition]
+    can :manage, Calculation
 
     return unless user.admin?
-    can :manage, [Mortgage, Condition]
+    can :manage, [Mortgage, Condition, Calculation]
   end
 end

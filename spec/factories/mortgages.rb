@@ -1,6 +1,10 @@
 FactoryBot.define do
+  sequence :title do |n|
+    "New_mortgage#{n}"
+  end
+
   factory :mortgage do
-    title { 'MyString' }
+    title
     description { 'MyText' }
     type_mortgage { :commercial_bank }
     title_banks_partners { [] }

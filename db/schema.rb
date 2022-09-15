@@ -20,8 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_13_054053) do
     t.integer "accumulation"
     t.integer "rental_cost"
     t.integer "monthly_savings"
-    t.integer "mortgage_ids", array: true
-    t.jsonb "calculated_values"
+    t.integer "mortgage_ids", default: [], array: true
+    t.jsonb "calculated_values", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,14 +1,70 @@
-div class='d-flex flex-column'
-  div
-    p= @calculation.apartment_price
-  div
-    p= @calculation.accumulation
-  div
-    p= @calculation.rental_cost
-  div
-    p= @calculation.monthly_savings
+div class='d-flex flex-column w-100'
+  div class='d-flex flex-row justify-content-center'
+    div class='title-apartment-price mx-2'
+      p class='fw-bold'
+        = 'Apartment price:'
+    div class='value-apartment-price text-center'
+      p class='text-decoration-underline'
+        = @calculation.apartment_price
+  div class='d-flex flex-row justify-content-center'  
+    div class='title-field-accumulation mx-2'
+      p class='fw-bold'
+        = 'Accumulation:'
+    div class='value-accumulation'
+      p class='text-decoration-underline'
+        = @calculation.accumulation
+  div class='d-flex flex-row justify-content-center'
+    div class='title-field-rental-cost mx-2'
+      p class='fw-bold'
+        = 'Rental cost:'
+    div class='value-rental-cost'
+      p class='text-decoration-underline'
+        = @calculation.rental_cost
+  div class='d-flex flex-row justify-content-center'
+    div class='title-field-monthly-savings mx-2'
+      p class='fw-bold'
+        = 'Monthly savings:'
+    div class='value-monthly-savings'
+      p class='text-decoration-underline'
+        = @calculation.monthly_savings
 
-div class='d-flex flex-column'
-  - @calculation.calculated_values.each do |key, value|
-    div
-      h4= Mortgage.find(key).title
+  div
+    table class='table text-center table-bordered' 
+      - @calculation.calculated_values.each do |mortgage_id, hash_data|
+        thead class='bg-light'
+          tr
+            th class='text-center' colspan='8'
+              h4= Mortgage.find(mortgage_id).title
+        - hash_data['interest_rate'].each do |name_interest_rate, value_rate|
+          thead class='thead-light'
+            tr
+              th class='text-center w-50' colspan='8'
+                h6 class='fw-light fst-italic'
+                  = "#{name_interest_rate} - #{value_rate}"
+            tr
+              th= 'Initial fee'
+              th= 'Rental period'
+              th= 'Sum rental costs'
+              th= 'Term mortgage'
+              th= 'Monthly payment'
+              th= 'Overpayment'
+              th= 'Lost money'
+              th= 'Full term'
+          
+          tbody
+            - hash_data['an_initial_fee'][name_interest_rate].each_with_index do |fee, index_fee|
+              - hash_data['mortgage_term'][name_interest_rate].each_with_index do |term, index_term|
+                tr
+                  - if index_term % hash_data['mortgage_term'][name_interest_rate].length == 0
+                    td rowspan="#{hash_data['mortgage_term'][name_interest_rate].length}" 
+                      = fee
+                    td rowspan="#{hash_data['mortgage_term'][name_interest_rate].length}" 
+                      = hash_data['rental_period'][name_interest_rate][index_fee]
+                    td rowspan="#{hash_data['mortgage_term'][name_interest_rate].length}" 
+                      = hash_data['sum_rental_costs'][name_interest_rate][index_fee]
+                  td= hash_data['mortgage_term'][name_interest_rate][index_term]
+                  td= hash_data['monthly_payment'][name_interest_rate][fee.to_s][index_term]
+                  td= hash_data['overpayment'][name_interest_rate][fee.to_s][index_term]
+                  td= hash_data['lost_money'][name_interest_rate][fee.to_s][index_term]
+                  td= hash_data['full_term'][name_interest_rate][fee.to_s][index_term]
+

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :condition do
     interest_rate { 'MyString_Interest_Rate' }
-    value_interest_rate_with_commision { 2.5 }
+    value_interest_rate_with_commision { 7.0 }
     max_loan_amount { 'MyString' }
     value_max_loan_amount { 25 }
     max_loan_term { 'MyString' }

@@ -1,6 +1,8 @@
 class CalculationsController < ApplicationController
   authorize_resource
   
+  before_action :fill_array_title_city
+
   def new
     if !params[:page] || params[:page] == 'index'
       @calculation = Calculation.new
@@ -20,12 +22,7 @@ class CalculationsController < ApplicationController
   def create
     @calculation = Calculation.new(calculation_params)
     
-    if params[:calculation][:mortgage_ids]
-      @calculation.make_calculation(params[:calculation][:mortgage_ids])
-    else
-       @calculation.make_calculation(nil)
-    end
-
+    call_make_calculation if @calculation.valid?
     if @calculation.save
       redirect_to @calculation, notice: 'Calculation create successfully'
     else
@@ -34,12 +31,35 @@ class CalculationsController < ApplicationController
   end
 
   private
+  def fill_array_title_city
+    @title_city = []
+    IO.foreach("#{Dir.pwd}/data/title_city_kz") {|city | @title_city << city.rstrip}    
+  end
+
+  def call_make_calculation
+    if params[:calculation][:mortgage_ids] && @calculation.valid?
+      @calculation.make_calculation(params[:calculation][:mortgage_ids])
+    elsif @calculation.valid?
+       @calculation.make_calculation(nil)
+    end
+  end
+
   def calculation_params
     params.require(:calculation).permit(:apartment_price,
                                         :accumulation,
                                         :rental_cost,
                                         :monthly_savings,
-                                        mortgage_ids: [])
+                                        :addition_income,
+                                        :addition_proof_of_income,
+                                        :addition_age,
+                                        :addition_pledge,
+                                        :addition_operating_loans,
+                                        :addition_city,
+                                        addition_bank: [],                                      
+                                        mortgage_ids: [],
+                                        addition_mortgage_term: [],
+                                        addition_initial_fee: [],
+                                        addition_type_of_housing: [])
 
   end 
 end

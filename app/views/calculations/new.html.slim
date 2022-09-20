@@ -23,4 +23,68 @@ div class='new-calculation w-100 bg-light p-2 d-flex flex-column'
           div class='form-check form-check-inline mt-2'
             = b.label class: 'form-check-label'
             = b.check_box class: 'form-check-input'  
+
+      div class='border p-2 mt-2'
+        div class='text-center'
+          h5= 'Additional information'
+        div class='mt-2'
+          = f.label :addition_mortgage_term
+          = f.label :addition_mortgage_term, 'By default, there will be a mortgage calculation for a period of [5, 10, 15, 20, 25] years. If you want to make a calculation for your terms, indicate it/them separated by commas', class: 'fst-italic fw-lighter'
+          = f.text_field :addition_mortgage_term, class: 'form-control'
+        div class='mt-2'
+          = f.label :addition_initial_fee
+          = f.label :addition_initial_fee, 'By default, there will be a calculation for initial contributions in the amount of [20, 30, 40, 50] percent of the specified property value. If you want to make a calculation for your initial fee, specify it/them separated by commas', class: 'fst-italic fw-lighter'
+          = f.text_field :addition_initial_fee, class: 'form-control'
+        div class='mt-2'
+          = f.label :addition_income
+          br
+          = f.label :addition_income, 'Enter the amount of your income', class: 'fst-italic fw-lighter'
+          = f.text_field :addition_income, class: 'form-control'
+        div class='d-flex flex-row justify-content-around mt-2'
+          div class='form-check form-check-inline mt-2'
+            = f.label :addition_proof_of_income, 'Can you verify income?', class: 'form-check-label'
+            = f.check_box :addition_proof_of_income, class: 'form-check-input'        
+          div class='form-check form-check-inline mt-2'
+            = f.label :addition_pledge, 'Can you provide a pledge?', class: 'form-check-label'
+            = f.check_box :addition_pledge, class: 'form-check-input'    
+        div class='mt-2'
+          = f.label :addition_age
+          = f.text_field :addition_age, class: 'form-control'
+        div class='mt-2'
+          = f.label :addition_operating_loans
+          br
+          = f.label :addition_operating_loans, 'If you have existing loans, indicate the amount of the monthly payment', class: 'fst-italic fw-lighter'
+          = f.text_field :addition_operating_loans, class: 'form-control'
+
+        div class='d-flex flex-row mt-2'       
+          div
+            = f.label :addition_city, 'In which city do you want to buy a house'
+          div class='mx-2'
+            = f.collection_select :addition_city,  @title_city, :itself, :itself, include_blank:  "Please select City", class: 'form-control'
+
+        div class='mt-2 border-top'
+          div class='text-center pt-2 fw-bold'
+            = 'Select the bank where you receive your salary'
+          = f.collection_check_boxes :addition_bank, 
+                                           ['HalykBank', 'SberBank', 'KaspiBank', 'OtbasyBank',
+                                            'First Heartland Jusan Bank', 'ForteBank', 'BankCenterCredit',
+                                            'EurasianBank', 'BankRBK', 'CitiBank', 'Eco Center Bank',
+                                            'AltynBank', 'VTB Bank', 'Home Credit Bank', 'HurBank',
+                                            'Bank of China Limited', 'Bank Freedom Finance',
+                                            'Industrial and Commercial Bank of China', 'KZI Bank',
+                                            'Shinhan Bank', 'Al Hilal Bank', 'ZamanBank'], :itself, :itself, include_hidden: false do |b|
+            div class='form-check form-check-inline mt-2'
+              = b.label class: 'form-check-label'
+              = b.check_box class: 'form-check-input'                
+        div class='mt-2 border-top'
+          div class='text-center pt-2 fw-bold'
+            = 'What is the purpose of the mortgage'
+          = f.collection_check_boxes :addition_type_of_housing, 
+                                           ['Primary housing', 'Secondary housing', 'House', 'Commercial real estate',
+                                            'Land plot for individual housing construction Bank', 'Real estate under construction', 'Repair',
+                                            'Individual construction'], :itself, :itself, include_hidden: false do |b|
+            div class='form-check form-check-inline mt-2'
+              = b.label class: 'form-check-label'
+              = b.check_box class: 'form-check-input'           
+
       = f.submit 'Calculate', class: 'btn btn-primary mt-2'

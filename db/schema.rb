@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_13_054053) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_19_100545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_13_054053) do
     t.jsonb "calculated_values", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "addition_mortgage_term", default: [], array: true
+    t.integer "addition_initial_fee", default: [], array: true
+    t.integer "addition_income"
+    t.boolean "addition_proof_of_income", default: false
+    t.integer "addition_age"
+    t.boolean "addition_pledge", default: false
+    t.integer "addition_operating_loans"
+    t.string "addition_type_of_housing", default: [], array: true
+    t.string "addition_city"
+    t.string "addition_bank", default: [], array: true
   end
 
   create_table "conditions", force: :cascade do |t|

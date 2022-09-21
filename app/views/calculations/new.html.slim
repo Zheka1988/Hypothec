@@ -31,10 +31,20 @@ div class='new-calculation w-100 bg-light p-2 d-flex flex-column'
           = f.label :addition_mortgage_term
           = f.label :addition_mortgage_term, 'By default, there will be a mortgage calculation for a period of [5, 10, 15, 20, 25] years. If you want to make a calculation for your terms, indicate it/them separated by commas', class: 'fst-italic fw-lighter'
           = f.text_field :addition_mortgage_term, class: 'form-control'
+          
+          div class='form-check form-check-inline mt-2'
+            = f.label :enable_default_mortgage_term, 'Include defaults for term mortgages', class: 'form-check-label'
+            = f.check_box :enable_default_mortgage_term, class: 'form-check-input' 
+
         div class='mt-2'
           = f.label :addition_initial_fee
           = f.label :addition_initial_fee, 'By default, there will be a calculation for initial contributions in the amount of [20, 30, 40, 50] percent of the specified property value. If you want to make a calculation for your initial fee, specify it/them separated by commas', class: 'fst-italic fw-lighter'
           = f.text_field :addition_initial_fee, class: 'form-control'
+
+          div class='form-check form-check-inline mt-2'
+            = f.label :enable_default_initial_fee, 'Include defaults for initial fee', class: 'form-check-label'
+            = f.check_box :enable_default_initial_fee, class: 'form-check-input'
+
         div class='mt-2'
           = f.label :addition_income
           br

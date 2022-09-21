@@ -21,7 +21,6 @@ class CalculationsController < ApplicationController
 
   def create
     @calculation = Calculation.new(calculation_params)
-    
     call_make_calculation if @calculation.valid?
     if @calculation.save
       redirect_to @calculation, notice: 'Calculation create successfully'
@@ -55,6 +54,8 @@ class CalculationsController < ApplicationController
                                         :addition_pledge,
                                         :addition_operating_loans,
                                         :addition_city,
+                                        :enable_default_initial_fee,
+                                        :enable_default_mortgage_term,
                                         addition_bank: [],                                      
                                         mortgage_ids: [],
                                         addition_mortgage_term: [],

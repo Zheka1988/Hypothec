@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_09_19_100545) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "calculations", force: :cascade do |t|
@@ -34,6 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_100545) do
     t.string "addition_type_of_housing", default: [], array: true
     t.string "addition_city"
     t.string "addition_bank", default: [], array: true
+    t.boolean "enable_default_mortgage_term", default: true
+    t.boolean "enable_default_initial_fee", default: true
   end
 
   create_table "conditions", force: :cascade do |t|

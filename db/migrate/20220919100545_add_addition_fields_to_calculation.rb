@@ -10,5 +10,8 @@ class AddAdditionFieldsToCalculation < ActiveRecord::Migration[7.0]
     add_column :calculations, :addition_type_of_housing, :string, array: true, default: []
     add_column :calculations, :addition_city, :string
     add_column :calculations, :addition_bank, :string, array: true, default: []
+    
+    add_column :calculations, :enable_default_mortgage_term, :boolean, default: true
+    add_column :calculations, :enable_default_initial_fee, :boolean, default: true
   end
 end

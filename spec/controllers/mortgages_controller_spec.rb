@@ -143,11 +143,12 @@ RSpec.describe MortgagesController, type: :controller do
         end
 
         it 'changes mortgage attributes' do
-          patch :update, params: { id: mortgage, mortgage: { title: "new title", description: "new description" } }
+          patch :update, params: { id: mortgage, mortgage: { title: "new title", description: "new description", type_mortgage: "commercial_bank",  title_banks_partners: ["OtbasyBank"] } }
           mortgage.reload
 
           expect(mortgage.title).to eq "new title"
           expect(mortgage.description).to eq "new description"
+          expect(mortgage.title_banks_partners).to eq ["OtbasyBank"]
         end
 
         it 'redirects to updated mortgage' do

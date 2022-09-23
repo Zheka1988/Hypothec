@@ -14,7 +14,7 @@ RSpec.describe Mortgage, type: :model do
 
     it 'commercial_bank' do
       expect(mortgage_commercial_bank).to be_invalid
-      expect(mortgage_commercial_bank.errors.full_messages.first).to include('should be empty')
+      expect(mortgage_commercial_bank.errors.full_messages.first).to include("can't be empty, select only one bank name")
     end
 
     it 'state_programm' do
@@ -24,7 +24,7 @@ RSpec.describe Mortgage, type: :model do
 
     it 'otbasy_bank' do
       expect(mortgage_otbasy_bank).to be_invalid
-      expect(mortgage_otbasy_bank.errors.full_messages.first).to include('should be empty')
+      expect(mortgage_otbasy_bank.errors.full_messages.first).to include("Only Otbasy bank must be selected")
     end
   end
 end

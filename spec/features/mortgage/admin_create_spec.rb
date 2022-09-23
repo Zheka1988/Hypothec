@@ -19,6 +19,7 @@ feature 'Admin can create mortgage', %q{
     scenario 'can create mortgage' do
       fill_in 'Title', with: 'New title'
       fill_in 'Description', with: 'New description'
+      check 'HalykBank'
       click_on 'Add mortgage'
 
       expect(page).to have_content 'New title'

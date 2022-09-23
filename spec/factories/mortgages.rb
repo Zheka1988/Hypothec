@@ -7,7 +7,7 @@ FactoryBot.define do
     title
     description { 'MyText' }
     type_mortgage { :commercial_bank }
-    title_banks_partners { [] }
+    title_banks_partners { ['HalykBank'] }
 
     trait :invalid do
       title { nil }
@@ -15,26 +15,27 @@ FactoryBot.define do
 
     trait :invalid_commercial_bank do
       type_mortgage { :commercial_bank }
-      title_banks_partners { ['HalykBank', 'KaspiBank'] }
+      title_banks_partners { [] }
     end
     trait :commercial_bank do
       type_mortgage { :commercial_bank }
+      title_banks_partners { ['HalykBank'] }
     end
 
     trait :invalid_state_programm do
       type_mortgage { :state_programm }
+      title_banks_partners { [] }
     end
     trait :state_programm do
       type_mortgage { :state_programm }
-      title_banks_partners { ['HalykBank', 'KaspiBank'] }
     end
 
     trait :invalid_otbasy_bank do
       type_mortgage { :otbasy_bank }
-      title_banks_partners { ['HalykBank', 'KaspiBank'] }
     end
     trait :otbasy_bank do
       type_mortgage { :otbasy_bank }
+      title_banks_partners { ['OtbasyBank'] }
     end
   end
 end

@@ -56,10 +56,10 @@ class CalculationsController < ApplicationController
                                         :addition_city,
                                         :enable_default_initial_fee,
                                         :enable_default_mortgage_term,
+                                        :addition_mortgage_term,
+                                        :addition_initial_fee,                                        
                                         addition_bank: [],                                      
                                         mortgage_ids: [],
-                                        addition_mortgage_term: [],
-                                        addition_initial_fee: [],
                                         addition_type_of_housing: [])
 
   end 

@@ -23,8 +23,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_100545) do
     t.jsonb "calculated_values", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "addition_mortgage_term", default: [], array: true
-    t.integer "addition_initial_fee", default: [], array: true
+    t.string "addition_mortgage_term"
+    t.string "addition_initial_fee"
     t.integer "addition_income"
     t.boolean "addition_proof_of_income", default: false
     t.integer "addition_age"

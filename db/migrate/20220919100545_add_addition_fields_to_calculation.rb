@@ -1,7 +1,7 @@
 class AddAdditionFieldsToCalculation < ActiveRecord::Migration[7.0]
   def change
-    add_column :calculations, :addition_mortgage_term, :integer, array: true, default: []
-    add_column :calculations, :addition_initial_fee, :integer, array: true, default: []
+    add_column :calculations, :addition_mortgage_term, :string
+    add_column :calculations, :addition_initial_fee, :string
     add_column :calculations, :addition_income, :integer
     add_column :calculations, :addition_proof_of_income, :boolean, default: false
     add_column :calculations, :addition_age, :integer

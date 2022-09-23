@@ -10,6 +10,7 @@ class Calculation < ApplicationRecord
   def make_calculation(mortgage_ids)
     create_hash_for_calculated_values(mortgage_ids)
     fill_hash_with_initial_data
+
     calculation_for_annuity_payments
   end
 
@@ -54,11 +55,34 @@ class Calculation < ApplicationRecord
           end 
         end
       end
+      additional_conditions(id)
+    end
+  end
 
-      self.calculated_values[id.to_s][:interest_rate].each do |title_interest_rate, value|
+
+  def additional_conditions(id)
+    condition_mortgage_term_and_initial_fee(id)
+  end
+
+  def condition_mortgage_term_and_initial_fee(id)
+    self.calculated_values[id.to_s][:interest_rate].each do |title_interest_rate, value|
+      if self.enable_default_initial_fee
         self.calculated_values[id.to_s][:an_initial_fee][title_interest_rate] = INITIAL_FEE
-        self.calculated_values[id.to_s][:mortgage_term][title_interest_rate] = MORTGAGE_TERM        
+        self.calculated_values[id.to_s][:an_initial_fee][title_interest_rate] += self.addition_initial_fee.split(',').map(&:to_i) if self.addition_initial_fee
+      else
+        self.calculated_values[id.to_s][:an_initial_fee][title_interest_rate] = self.addition_initial_fee.split(',').map(&:to_i) if self.addition_initial_fee
       end
+
+      if self.enable_default_mortgage_term
+        self.calculated_values[id.to_s][:mortgage_term][title_interest_rate] = MORTGAGE_TERM
+        self.calculated_values[id.to_s][:mortgage_term][title_interest_rate] += self.addition_mortgage_term.split(',').map(&:to_i) if self.addition_initial_fee
+
+      else
+        self.calculated_values[id.to_s][:mortgage_term][title_interest_rate] = self.addition_mortgage_term.split(',').map(&:to_i) if self.addition_initial_fee
+      end
+
+      self.calculated_values[id.to_s][:an_initial_fee][title_interest_rate].sort!
+      self.calculated_values[id.to_s][:mortgage_term][title_interest_rate].sort!
     end
   end
 

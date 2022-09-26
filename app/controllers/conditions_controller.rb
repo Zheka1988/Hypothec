@@ -58,6 +58,7 @@ class ConditionsController < ApplicationController
                                       :value_interest_rate_with_commision_without_proof_of_income,
                                       :value_interest_rate_without_commision_with_proof_of_income,
                                       :value_interest_rate_without_commision_without_proof_of_income,
+                                      :value_interest_rate_for_payroll_project,
                                       :value_max_loan_amount,
                                       :value_max_loan_term,
                                       :value_max_age,

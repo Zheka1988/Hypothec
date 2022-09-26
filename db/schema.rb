@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_19_100545) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_031816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_100545) do
     t.string "pledge"
     t.string "insurance"
     t.float "value_insurance"
+    t.float "value_interest_rate_for_payroll_project"
     t.index ["mortgage_id"], name: "index_conditions_on_mortgage_id"
   end
 

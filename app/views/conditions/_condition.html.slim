@@ -61,6 +61,12 @@ div class='mortgage-condition d-flex flex-column'
             p= 'Value without commision without proof of income'
           div class='content-field'
             p= condition.value_interest_rate_without_commision_without_proof_of_income
+      - if condition.value_interest_rate_for_payroll_project
+        div class='d-flex flex-column text-center shadow m-2 p-1'
+          div class='title-field'
+            p= 'Value interest rate for payroll project'
+          div class='content-field'
+            p= condition.value_interest_rate_for_payroll_project
   div class='condition-max-loan-amount mt-2'
     - if condition.max_loan_amount && !condition.max_loan_amount.blank?     
       div class='condition-max-loan-amount d-flex flex-row w-100'

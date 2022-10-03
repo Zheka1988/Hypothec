@@ -1,19 +1,23 @@
 = render 'shared/errors', resource: @mortgage
 
 = form_with model: @mortgage, class: 'form-group' do |f|
-  = f.label :title
+  = f.label :title, Mortgage.human_attribute_name("title")
   = f.text_field :title, class: 'form-control'
-  = f.label :description
+  = f.label :description, Mortgage.human_attribute_name("description")
   = f.text_area :description, class: 'form-control'
   = f.collection_radio_buttons :type_mortgage, Mortgage.type_mortgages, :first, :first do |type|
     div class='form-check form-check-inline mt-2'
+      - split_type_mortgage = type.label.delete_suffix("</label>").split(">") << "</label>"
+      - localize_type_mortgage = Mortgage.human_attribute_name(split_type_mortgage.second)
+      - split_type_mortgage.second.replace(localize_type_mortgage)
+      - split_type_mortgage.insert(1, ">")  
       = type.radio_button class: 'form-check-input'
-      = type.label class: 'form-check-label'
+      = split_type_mortgage.join.html_safe
   br
 
-  div class='border p-2'
+  div class='border mt-2 p-2'
     div class='text-center'
-      h5= 'Banks partners'
+      h5= t('mortgages.new.banks_partners')
     div
       = f.collection_check_boxes :title_banks_partners, 
                                  ['HalykBank', 'SberBank', 'KaspiBank', 'OtbasyBank',
@@ -27,6 +31,6 @@
           = b.label class: 'form-check-label'
           = b.check_box class: 'form-check-input'
     
-  = f.submit "#{resource[1]} mortgage", class: 'btn btn-primary mt-2'
+  = f.submit t("mortgages.common.#{resource[1]}_mortgage".downcase), class: 'btn btn-primary mt-2'
 
                      

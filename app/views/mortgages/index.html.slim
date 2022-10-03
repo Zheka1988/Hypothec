@@ -1,10 +1,11 @@
 div class='mortgages w-100 p-2 d-flex flex-column bg-light'
   div class='text-center border-bottom'
-    h2= "All mortgages"
+    h2= t('mortgages.index.title_page')
   div class='d-flex justify-content-end mt-2'
-    = link_to 'Calculate', new_calculation_path(page: "index"), class: 'btn btn-secondary mx-2'
+    - unless @mortgages.empty?
+      = link_to t('mortgages.common.calculate'), new_calculation_path(page: "index"), class: 'btn btn-secondary mx-2'
     - if can?(:new, Mortgage)
-      = link_to 'New mortgage', new_mortgage_path, class: 'btn btn-secondary'
+      = link_to t('mortgages.index.new_mortgage'), new_mortgage_path, class: 'btn btn-secondary'
   div
     - if @mortgages
       = render @mortgages

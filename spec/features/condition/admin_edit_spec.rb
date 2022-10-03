@@ -11,26 +11,26 @@ feature 'Only Admin can edit condition for mortgage' do
     before do
       sign_in(admin)
       visit mortgage_path(mortgage)
-      click_on 'Edit condition'
+      click_on I18n.t('mortgages.show.edit_condition')
     end
 
     scenario 'can edit condition for mortgage' do
-      fill_in 'Interest rate', with: 'new interest rate'
-      fill_in 'Note', with: 'new note'
-      click_on 'Update condition'
+      fill_in I18n.t('activerecord.attributes.condition.interest_rate'), with: 'new interest rate'
+      fill_in I18n.t('activerecord.attributes.condition.note'), with: 'new note'
+      click_on I18n.t('conditions.edit.update_condition')
 
-      expect(page).to have_content 'Condition update successfully'
+      expect(page).to have_content I18n.t('flash.conditions.edit', title: mortgage.title)
       expect(page).to have_content 'new interest rate'
       expect(page).to have_content 'new note'
     end
 
     scenario 'can not edit condition with errors for mortgage' do
-      fill_in 'Interest rate', with: ''
-      fill_in 'Value max loan amount', with: ''
-      click_on 'Update condition'
+      fill_in I18n.t('activerecord.attributes.condition.interest_rate'), with: ''
+      fill_in I18n.t('activerecord.attributes.condition.value_max_loan_amount'), with: ''
+      click_on I18n.t('conditions.edit.update_condition')
 
-      expect(page).to have_content "Interest rate can't be blank"
-      expect(page).to have_content "Value max loan amount can't be blank"      
+      expect(page).to have_content I18n.t('activerecord.errors.models.condition.attributes.interest_rate.blank')
+      expect(page).to have_content I18n.t('activerecord.errors.models.condition.attributes.value_max_loan_amount.blank')     
     end
 
   end
@@ -42,13 +42,13 @@ feature 'Only Admin can edit condition for mortgage' do
     end
 
     scenario 'can not see link for edit condition' do
-      expect(page).to_not have_content 'Edit condition'
+      expect(page).to_not have_content I18n.t('mortgages.show.edit_condition')
     end
 
     scenario 'can not get to condition edit page' do
       visit edit_condition_path(condition)
 
-      expect(page).to have_content 'Only Admin has access rights'
+      expect(page).to have_content I18n.t('unauthorized.manage.all').downcase
     end
   end
 
@@ -56,13 +56,13 @@ feature 'Only Admin can edit condition for mortgage' do
     scenario 'can not see link to edit condition' do
       visit mortgages_path(mortgage)
 
-      expect(page).to_not have_content "Edit condition"
+      expect(page).to_not have_content I18n.t('mortgages.show.edit_condition')
     end
 
     scenario 'can not get to condition edit page' do
       visit edit_condition_path(condition)
 
-      expect(page).to have_content 'You need to sign in or sign up before continuing'
+      expect(page).to have_content I18n.t('devise.failure.unauthenticated')
     end       
   end
 

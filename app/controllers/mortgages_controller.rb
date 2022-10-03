@@ -23,7 +23,7 @@ class MortgagesController < ApplicationController
     @mortgage = Mortgage.new(mortgage_params)
     
     if @mortgage.save
-      redirect_to @mortgage, notice: 'Mortgage create successfully'     
+      redirect_to @mortgage, notice: t('flash.mortgages.create')    
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class MortgagesController < ApplicationController
   def update
     @mortgage.title_banks_partners.clear unless mortgage_params.include?(:title_banks_partners)
     if @mortgage.update(mortgage_params)
-      redirect_to @mortgage, notice: 'Mortgage update successfully'
+      redirect_to @mortgage, notice: t('flash.mortgages.edit', title: @mortgage.title)  
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class MortgagesController < ApplicationController
 
   def destroy
     @mortgage.destroy
-    redirect_to mortgages_path, notice: 'Mortgage delete successfully' 
+    redirect_to mortgages_path, notice: t('flash.mortgages.delete', title: @mortgage.title) 
   end
 
   private

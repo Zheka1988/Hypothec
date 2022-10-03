@@ -7,10 +7,10 @@ module FeatureHelpers
   end
 
   def fill_in_the_fields_for_calculation
-    fill_in 'Apartment price', with: 21000000
-    fill_in 'Accumulation', with: 1000000
-    fill_in 'Rental cost', with: 110000
-    fill_in 'Monthly savings', with: 100000
+    fill_in Calculation.human_attribute_name('apartment_price'), with: 21000000
+    fill_in Calculation.human_attribute_name('accumulation'), with: 1000000
+    fill_in Calculation.human_attribute_name('rental_cost'), with: 110000
+    fill_in Calculation.human_attribute_name('monthly_savings'), with: 100000
   end
 
   def select_mortgages(mortgages)

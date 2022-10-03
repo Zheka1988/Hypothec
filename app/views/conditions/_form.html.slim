@@ -4,7 +4,7 @@ div
   = form_with model: [@mortgage, @condition], class: 'form-group' do |f|
     div class='border p-2 mt-2 d-flex flex-column'
       div class='p-2'
-        = f.label :interest_rate 
+        = f.label :interest_rate
         = f.text_field :interest_rate, class: 'form-control', placeholder: 'String'
       div class='d-flex flex-row flex-wrap'
         div class='w-50 text-center p-2'
@@ -117,4 +117,4 @@ div
       = f.text_area :note, class: 'form-control', placeholder: 'Text'
 
     div class='p-2 d-flex justify-content-center'
-      = f.submit "#{resource[2]} conditions", class: 'btn btn-primary w-25'
+      = f.submit t("conditions.edit.#{resource[2]}_condition".downcase), class: 'btn btn-primary w-25'

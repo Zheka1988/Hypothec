@@ -12,24 +12,24 @@ feature 'Admin can edit mortgage', %q{
     before do
       sign_in(admin)
       visit mortgages_path
-      click_on 'Edit'
+      click_on I18n.t('mortgages.index.edit')
     end
 
     scenario 'can edit mortgage' do
-      fill_in 'Title', with: 'edit title'
-      fill_in 'Description', with: 'edit description'
-      click_on 'Update mortgage'
+      fill_in Mortgage.human_attribute_name("title"), with: 'edit title'
+      fill_in Mortgage.human_attribute_name("description"), with: 'edit description'
+      click_on I18n.t('mortgages.common.update_mortgage')
 
-      expect(page).to have_content 'Mortgage update successfully'
+      expect(page).to have_content I18n.t('flash.mortgages.edit', title: 'edit title')
       expect(page).to have_content 'edit title'
       expect(page).to have_content 'edit description'
     end
 
     scenario 'attempt edit mortgage with errors' do
-      fill_in 'Title', with: ''
-      click_on 'Update mortgage'
+      fill_in Mortgage.human_attribute_name("title"), with: ''
+      click_on I18n.t('mortgages.common.update_mortgage')
 
-      expect(page).to have_content "Title can't be blank"
+      expect(page).to have_content I18n.t('activerecord.errors.models.mortgage.attributes.title.blank')
     end
   end
 
@@ -39,13 +39,13 @@ feature 'Admin can edit mortgage', %q{
     scenario 'can not see link to edit_mortgage_path' do
       visit mortgages_path
 
-      expect(page).to_not have_content "Edit mortgage"
+      expect(page).to_not have_content I18n.t('mortgages.index.edit')
     end
 
     scenario 'can not get to mortgage edit page' do
       visit edit_mortgage_path(mortgage)
 
-      expect(page).to have_content 'Only Admin has access rights'
+      expect(page).to have_content I18n.t('unauthorized.manage.all').downcase
     end
   end
 
@@ -53,13 +53,13 @@ feature 'Admin can edit mortgage', %q{
     scenario 'can not see link to edit_mortgage_path' do
       visit mortgages_path
 
-      expect(page).to_not have_content "Edit mortgage"
+      expect(page).to_not have_content I18n.t('mortgages.index.edit')
     end
 
     scenario 'can not get to mortgage edit page' do
       visit edit_mortgage_path(mortgage)
 
-      expect(page).to have_content 'You need to sign in or sign up before continuing'
+      expect(page).to have_content I18n.t('devise.failure.unauthenticated')
     end    
   end
 end

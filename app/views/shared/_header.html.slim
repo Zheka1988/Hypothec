@@ -1,7 +1,7 @@
 nav class='navbar navbar-light bg-light d-flex-inline sticky-top'
-  div class='p-2'
+  div class='p-2 mx-5'
     = link_to 'Hypothec', mortgages_path, class: 'text-decoration-none link-dark'
-  div class='p-2'
+  div class='p-2 mx-5'
     - if current_user 
       = link_to current_user.email, '#', class: 'text-decoration-none mx-2 link-secondary'
       = link_to 'Logout', destroy_user_session_path, class: 'btn btn-secondary btn-sm'

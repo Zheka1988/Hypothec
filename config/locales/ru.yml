@@ -1,0 +1,211 @@
+ru:
+  unauthorized:
+    manage:
+      all: "Права доступа есть только у администратора."
+
+  mortgages:
+    index:
+      title_page: 'Все ипотеки PK'
+      new_mortgage: 'Новая ипотека'
+      more: 'Показать'
+      edit: 'Редактировать'
+      delete: 'Удалить'
+    new:
+      title_page: 'Новая ипотека'
+      banks_partners: 'Банки партнеры'
+    delete:
+      confirm: 'Вы уверены?'
+    edit:
+      title_page: 'Редактировать ипотеку'
+    show:
+      edit_condition: 'Редактировать условия'
+      delete_condition: 'Удалить условия'
+      interest_rate: 'Процентная ставка'
+      value_interest_rate_with_commision: 'Значение процентной ставки с комиссией'
+      value_interest_rate_without_commision: 'Значение процентной ставки без комиссии'
+      value_interest_rate_with_proof_of_income: 'Значение процентной c подтверждением дохода'
+      value_interest_rate_without_proof_of_income: 'Значение процентной без подтверждения дохода'
+      value_interest_rate_with_commision_with_proof_of_income: 'Значение процентной ставки с комиссией c подтверждением дохода'
+      value_interest_rate_with_commision_without_proof_of_income: 'Значение процентной ставки с комиссией без подтверждения дохода'
+      value_interest_rate_without_commision_with_proof_of_income: 'Значение процентной ставки без комиссии c подтверждением дохода'
+      value_interest_rate_without_commision_without_proof_of_income: 'Значение процентной ставки без комиссии без подтверждения дохода'
+      value_interest_rate_for_payroll_project: 'Значение процентной ставки для зарплатного проекта'
+      max_loan_amount: 'Максимальная сумма кредита'
+      value_max_loan_amount: 'Значение максимальной суммы кредита'
+      max_loan_term: 'Максимальный срок кредита'
+      value_max_loan_term: 'Значение максимального срока кредита'
+      max_age: 'Максимальный возраст'
+      value_max_age: 'Значение максимального возраста'
+      income: 'Доход'
+      value_income: 'Значение дохода'
+      an_initial_fee: 'Первоначальный взнос'
+      value_min_an_initial_fee: 'Значение минимального первоначального взноса'
+      value_max_an_initial_fee: 'Значение максимального первоначального взноса'
+      additional_expenses: 'Дополнительные расходы'
+      value_additional_expenses: 'Значение дополнительных расходов'
+      value_loan_processing_fee: 'Значение комиссии за оформление кредита'
+      value_application_fee: 'Значение cтоимости оформления заявки'
+      value_arly_redemption_fee: 'Значение платы за досрочное погашение'
+      pledge: 'Залог'
+      insurance: 'Страхование'
+      value_insurance: 'Значение страховки'
+      type_of_housing: 'Тип жилья'
+      note: 'Примечание'
+      experience_and_registration: 'Рабочий стаж и регистрация'
+    common:
+      add_mortgage: 'Добавить в БД'       
+      update_mortgage: 'Обновить в БД'
+      calculate: 'Расчитать'
+      main: 'Все ипотеки'
+  
+  conditions:
+    edit:
+      title_page: 'Редактировать условия для'
+      update_condition: 'Редактировать условия'
+      add_condition: 'Добавить условия'     
+    delete:
+      confirm: 'Вы уверены?'
+  calculations:
+    new:
+      title_page: 'Новый расчет'
+      select_mortgages: 'Выберите название ипотечных кредитов (по умолчанию будет расчет для всех)'
+      additional_information: 'Дополнительная информация'
+      addition_mortgage_term:
+        comment: 'По умолчанию будет расчет на срок [5, 10, 15, 20, 25] лет. Если Вы хотите произвести расчет по Вашим срокам, укажите его/их через запятую'
+      addition_initial_fee:
+        comment: 'По умолчанию будет расчет по первоначальным взносам в размере [20, 30, 40, 50] процентов от указанной стоимости недвижимости. Если Вы хотите произвести расчет по Вашим первоначальным платежам, укажите его/их через запятую'
+      addition_proof_of_income:
+        comment: 'Можете ли Вы подтвердить доход?'
+      addition_pledge:
+        comment: 'Можете ли Вы предоставить залог?'
+      addition_operating_loans:
+        comment: 'Если у Вас есть действующие кредиты, укажите сумму ежемесячного платежа'
+      addition_bank:
+        comment: 'Выберите банк, в котором Вы получаете зарплату'
+      addition_city:
+        comment: 'В каком городе Вы хотите приобрести жилье'
+        empty_field: 'Пожалуйста, выберите город'
+      addition_type_of_housing:
+        comment: 'Укажите какой тип жилья Вы хотите приобрести'
+        primary: 'Первичное жилье'
+        secondary: 'Вторичное жилье'
+        house: 'Дом'
+        commercial_real_estate: 'Коммерческая недвижимость'
+        land_plot_for_individual_housing_construction: 'Земельный участок под ИЖС'
+        real_estate_under_construction: 'Cтроящаяся недвижимость'
+        repair: 'Ремонт'
+        individual_construction: 'Индивидуальное строительство'
+
+  activerecord:
+    attributes:
+      mortgage:
+        title: 'Название'
+        description: 'Описание'
+        title_banks_partners: 'Название банков партнеров'
+        commercial_bank: 'Коммерческий банк'
+        state_programm: 'Государственная программа'
+        otbasy_bank: 'Отбасы Банк'
+      condition:
+        interest_rate: 'Процентная ставка'
+        value_interest_rate_with_commision: 'Значение процентной ставки с комиссией'
+        value_interest_rate_without_commision: 'Значение процентной ставки без комиссии'
+        value_interest_rate_with_proof_of_income: 'Значение процентной c подтверждением дохода'
+        value_interest_rate_without_proof_of_income: 'Значение процентной без подтверждения дохода'
+        value_interest_rate_with_commision_with_proof_of_income: 'Значение процентной ставки с комиссией c подтверждением дохода'
+        value_interest_rate_with_commision_without_proof_of_income: 'Значение процентной ставки с комиссией без подтверждения дохода'
+        value_interest_rate_without_commision_with_proof_of_income: 'Значение процентной ставки без комиссии c подтверждением дохода'
+        value_interest_rate_without_commision_without_proof_of_income: 'Значение процентной ставки без комиссии без подтверждения дохода'
+        value_interest_rate_for_payroll_project: 'Значение процентной ставки для зарплатного проекта'
+        max_loan_amount: 'Максимальная сумма кредита'
+        value_max_loan_amount: 'Значение максимальной суммы кредита'
+        max_loan_term: 'Максимальный срок кредита'
+        value_max_loan_term: 'Значение максимального срока кредита'
+        max_age: 'Максимальный возраст'
+        value_max_age: 'Значение максимального возраста'
+        income: 'Доход'
+        value_income: 'Значение дохода'
+        an_initial_fee: 'Первоначальный взнос'
+        value_min_an_initial_fee: 'Значение минимального первоначального взноса'
+        value_max_an_initial_fee: 'Значение максимального первоначального взноса'
+        additional_expenses: 'Дополнительные расходы'
+        value_additional_expenses: 'Значение дополнительных расходов'
+        value_loan_processing_fee: 'Значение комиссии за оформление кредита'
+        value_application_fee: 'Значение cтоимости оформления заявки'
+        value_arly_redemption_fee: 'Значение платы за досрочное погашение'
+        pledge: 'Залог'
+        insurance: 'Страхование'
+        value_insurance: 'Значение страховки'
+        type_of_housing: 'Тип жилья'
+        note: 'Примечание'
+        experience_and_registration: 'Рабочий стаж и регистрация'
+      calculation:
+        apartment_price: 'Стоимость квартиры'
+        accumulation: 'Накопления'
+        rental_cost: 'Стоимость аренды'
+        initial_fee: 'Первоначальный взнос'
+        sum_rental_costs: 'Сумма затрат на аренду'
+        rental_period: 'Срок аренды'
+        term_mortgage: 'Срок ипотеки'
+        monthly_payment: 'Ежемесячный платеж'
+        overpayment: 'Переплата'
+        lost_money: 'Потерянные деньги'
+        full_term: 'Полный срок'
+        monthly_savings: 'Ежемесячные сбережения'
+        addition_mortgage_term: 'Дополнительный(е) срок(и) ипотеки'
+        addition_initial_fee: 'Дополнительный(е) первоначальный(е) взнос(ы)'
+        addition_income: 'Доход'
+        addition_proof_of_income: 'Подтверждение о доходах'
+        addition_age: 'Возраст'
+        addition_pledge: 'Залог'
+        addition_operating_loans: 'Действующие кредиты'
+        addition_type_of_housing: 'Тип жилья'
+        addition_city: 'Город'
+        addition_bank: 'Банк'
+        enable_default_mortgage_term: 'Включить сроки по умолчанию'
+        enable_default_initial_fee: 'Включить первоначальные взносы по умолчанию'
+        
+    errors:
+      models:
+        mortgage:
+          attributes:
+            title:
+              blank: '- поле не может быть пустым'
+            description:
+              blank: '- поле не может быть пустым'
+        condition:
+          attributes:
+            interest_rate:
+              blank: '- поле не может быть пустым'
+            value_max_loan_amount:
+              blank: '- поле не может быть пустым'
+        calculation:
+          attributes:
+            apartment_price:
+              blank: '- поле не может быть пустым'
+            accumulation: 
+              blank: '- поле не может быть пустым'
+            rental_cost:
+              blank: '- поле не может быть пустым'
+            monthly_savings:
+              blank: '- поле не может быть пустым'
+        user:
+          attributes:
+            email:
+              taken: 'Пользователь с такой почтой уже существует'
+
+  flash:
+    mortgages:
+      commercial_bank: 'не может быть пустым, выберите только один банк'
+      state_programm: 'не может быть пустым, выберите один или несколько банков'
+      otbasy_bank: 'необходимо выбрать только Отбасы банк'
+      create: 'Новая ипотека успешно добавлена'
+      edit: "Ипотека '%{title}' успешно обновлена"
+      delete: "Ипотека '%{title}' успешно удалена"
+    conditions:
+      value_interest_rate: 'должно быть указано хотя бы одно значение'
+      create: "Условия для ипотеки '%{title}' успешно добавленны"
+      edit: "Условия для ипотеки '%{title}' успешно обновлены"
+      delete: "Условия для ипотеки '%{title}' успешно удалены"
+    calculations:
+      create: 'Расчет успешно создан'
+      mortgage_ids: 'Бд пуста или ипотеки с таким id не существует'

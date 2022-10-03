@@ -8,7 +8,7 @@ class ConditionsController < ApplicationController
   def create
     @condition = @mortgage.build_condition(condition_params)
     if @condition.save
-      redirect_to @mortgage, notice: 'Conditions create successfully'
+      redirect_to @mortgage, notice: t('flash.conditions.create', title: @mortgage.title)
     else
       render 'mortgages/show', status: :unprocessable_entity
     end
@@ -19,7 +19,7 @@ class ConditionsController < ApplicationController
   
   def update
     if @condition.update(condition_params)
-      redirect_to @condition.mortgage, notice: 'Condition update successfully'
+      redirect_to @condition.mortgage, notice: t('flash.conditions.edit', title: @condition.mortgage.title)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class ConditionsController < ApplicationController
   def destroy
     @mortgage = @condition.mortgage
     @condition.destroy
-    redirect_to @mortgage, status: :see_other, notice: 'Condition delete successfully'   
+    redirect_to @mortgage, status: :see_other, notice: t('flash.conditions.delete', title: @mortgage.title)
   end
 
   private

@@ -2,28 +2,28 @@ div class='d-flex flex-column w-100'
   div class='d-flex flex-row justify-content-center'
     div class='title-apartment-price mx-2'
       p class='fw-bold'
-        = 'Apartment price:'
+        = Calculation.human_attribute_name('apartment_price') + ':'
     div class='value-apartment-price text-center'
       p class='text-decoration-underline'
         = @calculation.apartment_price
   div class='d-flex flex-row justify-content-center'  
     div class='title-field-accumulation mx-2'
       p class='fw-bold'
-        = 'Accumulation:'
+        = Calculation.human_attribute_name('accumulation') + ':'
     div class='value-accumulation'
       p class='text-decoration-underline'
         = @calculation.accumulation
   div class='d-flex flex-row justify-content-center'
     div class='title-field-rental-cost mx-2'
       p class='fw-bold'
-        = 'Rental cost:'
+        = Calculation.human_attribute_name('rental_cost') + ':'
     div class='value-rental-cost'
       p class='text-decoration-underline'
         = @calculation.rental_cost
   div class='d-flex flex-row justify-content-center'
     div class='title-field-monthly-savings mx-2'
       p class='fw-bold'
-        = 'Monthly savings:'
+        = Calculation.human_attribute_name('monthly_savings') + ':'
     div class='value-monthly-savings'
       p class='text-decoration-underline'
         = @calculation.monthly_savings
@@ -40,16 +40,16 @@ div class='d-flex flex-column w-100'
             tr
               th class='text-center w-50' colspan='8'
                 h6 class='fw-light fst-italic'
-                  = "#{name_interest_rate} - #{value_rate}"
-            tr
-              th= 'Initial fee'
-              th= 'Rental period'
-              th= 'Sum rental costs'
-              th= 'Term mortgage'
-              th= 'Monthly payment'
-              th= 'Overpayment'
-              th= 'Lost money'
-              th= 'Full term'
+                  = Condition.human_attribute_name(name_interest_rate) + ' - ' + " #{value_rate}"
+            tr class="align-middle text-wrap"
+              th= Calculation.human_attribute_name('initial_fee')
+              th= Calculation.human_attribute_name('rental_period')
+              th= Calculation.human_attribute_name('sum_rental_costs')
+              th= Calculation.human_attribute_name('term_mortgage')
+              th= Calculation.human_attribute_name('monthly_payment')
+              th= Calculation.human_attribute_name('overpayment')
+              th= Calculation.human_attribute_name('lost_money')
+              th= Calculation.human_attribute_name('full_term')
           
           tbody
             - hash_data['an_initial_fee'][name_interest_rate].each_with_index do |fee, index_fee|

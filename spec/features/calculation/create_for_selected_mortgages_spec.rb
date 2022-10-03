@@ -16,7 +16,7 @@ feature 'Any user can create calculation for selected mortgages' do
       fill_in_the_fields_for_calculation
       select_mortgages(mortgages)
 
-      click_on 'Calculate'
+      click_on I18n.t('mortgages.common.calculate')
 
       expect(page).to have_content '21000000'
       expect(page).to have_content '1000000'
@@ -26,9 +26,9 @@ feature 'Any user can create calculation for selected mortgages' do
     end
 
     scenario 'can not create calculation with errors' do
-      click_on 'Calculate'
+      click_on I18n.t('mortgages.common.calculate')
 
-      expect(page).to have_content "Apartment price can't be blank"
+      expect(page).to have_content I18n.t('activerecord.errors.models.calculation.attributes.apartment_price.blank')
     end
   end
 
@@ -42,7 +42,7 @@ feature 'Any user can create calculation for selected mortgages' do
       fill_in_the_fields_for_calculation
       select_mortgages(mortgages)
 
-      click_on 'Calculate'
+      click_on I18n.t('mortgages.common.calculate')
       
       expect(page).to have_content '21000000'
       expect(page).to have_content '1000000'
@@ -52,9 +52,9 @@ feature 'Any user can create calculation for selected mortgages' do
     end
 
     scenario 'can not create calculation with errors' do
-      click_on 'Calculate'
+      click_on I18n.t('mortgages.common.calculate')
 
-      expect(page).to have_content "Apartment price can't be blank"
+      expect(page).to have_content I18n.t('activerecord.errors.models.calculation.attributes.apartment_price.blank')
     end
   end
 
@@ -65,7 +65,7 @@ feature 'Any user can create calculation for selected mortgages' do
       fill_in_the_fields_for_calculation
       select_mortgages(mortgages)
 
-      click_on 'Calculate'
+      click_on I18n.t('mortgages.common.calculate')
 
       expect(page).to have_content '21000000'
       expect(page).to have_content '1000000'
@@ -75,9 +75,9 @@ feature 'Any user can create calculation for selected mortgages' do
     end
 
     scenario 'can not create calculation with errors' do
-      click_on 'Calculate'
+      click_on I18n.t('mortgages.common.calculate')
 
-      expect(page).to have_content "Apartment price can't be blank"
+      expect(page).to have_content I18n.t('activerecord.errors.models.calculation.attributes.apartment_price.blank')
     end   
   end
 end

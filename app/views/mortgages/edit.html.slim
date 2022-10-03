@@ -1,7 +1,7 @@
 div class='update-mortgage w-100 bg-light p-2 d-flex flex-column'
   div class='text-center border-bottom'
-    h2= "Update mortgage"
+    h2= t('mortgages.edit.title_page')
   div class='d-flex justify-content-end mt-2'
-    = link_to 'Main', mortgages_path ,class: 'btn btn-secondary'
+    = link_to t('mortgages.common.main'), mortgages_path ,class: 'btn btn-secondary'
   div
     = render 'form', resource: [@mortgage, "Update"]

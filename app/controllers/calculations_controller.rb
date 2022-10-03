@@ -11,7 +11,7 @@ class CalculationsController < ApplicationController
       @mortgage = Mortgage.find(params[:page].split("-").last)
     else
       @calculation = Calculation.new
-      @calculation.errors.add(:mortgage_ids, 'invalid values')
+      @calculation.errors.add(:mortgage_ids, t('flash.calculations.mortgage_ids') )
     end
   end
 
@@ -23,7 +23,7 @@ class CalculationsController < ApplicationController
     @calculation = Calculation.new(calculation_params)
     call_make_calculation if @calculation.valid?
     if @calculation.save
-      redirect_to @calculation, notice: 'Calculation create successfully'
+      redirect_to @calculation, notice: t('flash.calculations.create')
     else
       render :new, status: :unprocessable_entity
     end
@@ -61,6 +61,5 @@ class CalculationsController < ApplicationController
                                         addition_bank: [],                                      
                                         mortgage_ids: [],
                                         addition_type_of_housing: [])
-
   end 
 end

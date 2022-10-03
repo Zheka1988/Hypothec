@@ -1,8 +1,8 @@
 div class='edit-condition d-flex flex-column w-100 p-2 bg-light'
   div class='mortgage-title text-center border-bottom'
-    h3= "Edit condition for #{@condition.mortgage.title}"
+    h3= t('conditions.edit.title_page')+" #{@condition.mortgage.title}"
   div class='d-flex justify-content-end mt-2'
-    = link_to 'Main', mortgages_path ,class: 'btn btn-secondary' 
+    = link_to t('mortgages.common.main'), mortgages_path ,class: 'btn btn-secondary' 
   - if can?(:edit, Condition)
     div
       = render 'form', resource: [@mortgage, @condition, 'Update']

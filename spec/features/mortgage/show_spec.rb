@@ -13,14 +13,14 @@ feature 'Any user can watch the mortgage and see conditions', %q{
     sign_in(user)
 
     visit mortgages_path
-    click_on 'More'
+    click_on I18n.t('mortgages.index.more')
 
     expect(page).to have_content "MyString_Interest_Rate"
   end
 
   scenario 'Unauthenticated user can watch the mortage' do
     visit mortgages_path
-    click_on 'More'
+    click_on I18n.t('mortgages.index.more')
 
     expect(page).to have_content "MyString_Interest_Rate"
   end

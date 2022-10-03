@@ -16,7 +16,7 @@ class Condition < ApplicationRecord
     end
 
     if count == 0
-      errors.add(:interest_rate, "at least one value must be specified")
+      errors.add(:interest_rate, I18n.t('flash.conditions.value_interest_rate'))
     end
   end
 end

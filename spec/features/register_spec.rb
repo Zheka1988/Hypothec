@@ -16,7 +16,7 @@ feature 'User can registered in the system', %q{
     fill_in 'Password confirmation', with: '12345678'
     click_button 'Sign up'
     
-    expect(page).to have_content 'Welcome! You have signed up successfully.'
+    expect(page).to have_content I18n.t('devise.registrations.signed_up')
   end
 
   scenario 'Registered user tries registered' do
@@ -25,6 +25,6 @@ feature 'User can registered in the system', %q{
     fill_in 'Password confirmation', with: user.password_confirmation
     click_button'Sign up'
 
-    expect(page).to have_content 'Email has already been taken'    
+    expect(page).to have_content I18n.t('activerecord.errors.models.user.attributes.email.taken')    
   end
 end

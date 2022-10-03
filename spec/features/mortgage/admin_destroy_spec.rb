@@ -8,21 +8,21 @@ feature 'Admin can delete mortgage' do
   scenario 'Admin can delete mortgage' do
     sign_in(admin)
     visit mortgages_path
-    click_on 'Delete'
+    click_on I18n.t('mortgages.index.delete')
 
-    expect(page).to_not have_content mortgage.title
+    expect(page).to_not have_content mortgage.description
   end
 
   scenario 'No admin can not see link to delete mortgage' do
     sign_in(user)
     visit mortgages_path
 
-    expect(page).to_not have_content "Delete mortgage"
+    expect(page).to_not have_content I18n.t('mortgages.index.delete')
   end
 
   scenario 'Unauthenticated user can not see link to delete mortgage' do
     visit mortgages_path
 
-    expect(page).to_not have_content "Delete mortgage"
+    expect(page).to_not have_content I18n.t('mortgages.index.delete')
   end
 end

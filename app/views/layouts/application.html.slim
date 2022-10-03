@@ -10,13 +10,13 @@ html
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_importmap_tags
   
-  body class='container'
+  body 
     = render 'shared/header'
-    
-    div class='notice'
-      = notice
-    div class='alert'
-      = alert
-    
-    div class='d-flex justify-content-center'  
-      = yield
+    div class='container'
+      div class='notice'
+        = notice
+      div class='alert'
+        = alert
+      
+      div class='d-flex justify-content-center'  
+        = yield

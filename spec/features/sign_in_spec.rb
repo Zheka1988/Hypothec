@@ -15,7 +15,7 @@ feature 'User can sign in', %q{
     fill_in 'Password', with: user.password
     click_button 'Log in'
 
-    expect(page).to have_content I18n.t('devise.sessions.signed_in')
+    expect(page).to have_content t('devise.sessions.signed_in')
   end
 
   scenario 'Unregistered user tries sign in' do
@@ -23,6 +23,6 @@ feature 'User can sign in', %q{
     fill_in 'Password', with: '12345678'
     click_button 'Log in'
 
-    expect(page).to have_content I18n.t('devise.failure.invalid', authentication_keys: 'Email')
+    expect(page).to have_content I18n.t('devise.failure.invalid', authentication_keys: 'Email' )
   end
 end

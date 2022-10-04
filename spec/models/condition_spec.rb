@@ -12,7 +12,7 @@ RSpec.describe Condition, type: :model do
     
     it 'validate_value_interest_rate' do
       expect(condition).to be_invalid
-      expect(condition.errors.full_messages.first).to include I18n.t('flash.conditions.value_interest_rate')
+      expect(condition.errors.full_messages.first).to include t('flash.conditions.value_interest_rate')
     end
   end
 end

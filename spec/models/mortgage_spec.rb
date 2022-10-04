@@ -14,17 +14,17 @@ RSpec.describe Mortgage, type: :model do
 
     it 'commercial_bank' do
       expect(mortgage_commercial_bank).to be_invalid
-      expect(mortgage_commercial_bank.errors.full_messages.first).to include I18n.t('flash.mortgages.commercial_bank')
+      expect(mortgage_commercial_bank.errors.full_messages.first).to include t('flash.mortgages.commercial_bank')
     end
 
     it 'state_programm' do
       expect(mortgage_state_program).to be_invalid
-      expect(mortgage_state_program.errors.full_messages.first).to include I18n.t('flash.mortgages.state_programm')
+      expect(mortgage_state_program.errors.full_messages.first).to include t('flash.mortgages.state_programm')
     end
 
     it 'otbasy_bank' do
       expect(mortgage_otbasy_bank).to be_invalid
-      expect(mortgage_otbasy_bank.errors.full_messages.first).to include I18n.t('flash.mortgages.otbasy_bank')
+      expect(mortgage_otbasy_bank.errors.full_messages.first).to include t('flash.mortgages.otbasy_bank')
     end
   end
 end

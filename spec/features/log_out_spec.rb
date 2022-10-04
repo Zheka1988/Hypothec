@@ -12,7 +12,7 @@ feature 'User can log out', %q{
     sign_in(user)
     click_on 'Logout'
     
-    expect(page).to have_content I18n.t('devise.sessions.signed_out')
+    expect(page).to have_content t('devise.sessions.signed_out')
   end
 
   scenario 'Unauthenticated user can not log out' do

@@ -95,6 +95,8 @@ ru:
         real_estate_under_construction: 'Cтроящаяся недвижимость'
         repair: 'Ремонт'
         individual_construction: 'Индивидуальное строительство'
+    show:
+      new_calculate: 'Новый расчет'
 
   activerecord:
     attributes:

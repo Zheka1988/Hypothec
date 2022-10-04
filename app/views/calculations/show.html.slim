@@ -1,6 +1,7 @@
 div class='d-flex flex-column w-100'
   div class='d-flex flex-row justify-content-end mt-2'
-    = link_to t('mortgages.common.main'), mortgages_path ,class: 'btn btn-secondary'  
+    = link_to t('calculations.show.new_calculate'), new_calculation_path(page: "index"), class: 'btn btn-secondary mx-2'
+    = link_to t('mortgages.common.main'), mortgages_path ,class: 'btn btn-secondary' 
   div class='d-flex flex-row justify-content-center'
     div class='title-apartment-price mx-2'
       p class='fw-bold'

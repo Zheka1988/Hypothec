@@ -7,13 +7,15 @@ RSpec.describe Ability do
   describe 'for guest' do
     let(:user) { nil }
     it { should be_able_to :read, Mortgage, Condition }
-    it { should be_able_to :manage, Calculation }
+    it { should be_able_to :create, Calculation }
+    it { should be_able_to :show, Calculation }
   end
 
   describe 'for user' do
     let(:user) { create :user }
     it { should be_able_to :read, Mortgage, Condition }
-    it { should be_able_to :manage, Calculation }    
+    it { should be_able_to :create, Calculation } 
+    it { should be_able_to :read, Calculation, author_id: user.id }  
   end
 
   describe 'for admin' do

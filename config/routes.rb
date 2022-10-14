@@ -6,5 +6,5 @@ Rails.application.routes.draw do
     resources :conditions, only: [:create, :update, :destroy, :edit]
   end
 
-  resources :calculations, only: [:create, :show, :new]
+  resources :calculations, only: [:create, :show, :new, :index]
 end

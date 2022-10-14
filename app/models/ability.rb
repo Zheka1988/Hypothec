@@ -7,11 +7,13 @@ class Ability
     user ||= User.new
     
     can :read, [Mortgage, Condition]
-    can :manage, Calculation
+    can :create, Calculation
+    can :show, Calculation
 
     return unless user.present?
     can :read, [Mortgage, Condition]
-    can :manage, Calculation
+    can :create, Calculation
+    can :read, Calculation, author_id: user.id
 
     return unless user.admin?
     can :manage, [Mortgage, Condition, Calculation]

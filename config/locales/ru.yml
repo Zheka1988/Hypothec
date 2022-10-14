@@ -98,6 +98,14 @@ ru:
     show:
       new_calculate: 'Новый расчет'
 
+  header:
+    admin:
+      calculation:
+        all_calculations: 'Все расчеты'
+    user:  
+      calculation:
+        all_calculations: 'Мои расчеты'
+
   activerecord:
     attributes:
       mortgage:
@@ -211,3 +219,4 @@ ru:
     calculations:
       create: 'Расчет успешно создан'
       mortgage_ids: 'Бд пуста или ипотеки с таким id не существует'
+      index: 'Вам необходимо войти в систему'

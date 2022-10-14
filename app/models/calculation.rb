@@ -2,6 +2,8 @@ class Calculation < ApplicationRecord
   INITIAL_FEE = [20, 30, 40, 50]
   MORTGAGE_TERM = [5, 10, 15, 20, 25]
 
+  belongs_to :author, class_name: "User", foreign_key: :author_id, optional: true
+
   validates :apartment_price,
             :accumulation,
             :rental_cost,

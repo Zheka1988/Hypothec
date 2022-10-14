@@ -1,0 +1,7 @@
+p= 'All calculations'
+
+- @calculations.each do |calculation|
+  - if calculation.author
+    p= calculation.author.email
+  - else
+    p= 'No author'

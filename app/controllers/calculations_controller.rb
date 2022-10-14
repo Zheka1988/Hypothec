@@ -2,6 +2,16 @@ class CalculationsController < ApplicationController
   authorize_resource
   
   before_action :fill_array_title_city
+  
+  def index
+    if current_user&.admin
+      @calculations = Calculation.all
+    elsif current_user
+      @calculations = Calculation.where(author: current_user)
+    else
+      redirect_to new_user_session_path, notice: t('flash.calculations.index')
+    end
+  end
 
   def new
     if !params[:page] || params[:page] == 'index'
@@ -17,10 +27,13 @@ class CalculationsController < ApplicationController
 
   def show
     @calculation = Calculation.find(params[:id])
+    authorize! :read, @calculation
   end
 
   def create
     @calculation = Calculation.new(calculation_params)
+    @calculation.author = current_user
+
     call_make_calculation if @calculation.valid?
     if @calculation.save
       redirect_to @calculation, notice: t('flash.calculations.create')
